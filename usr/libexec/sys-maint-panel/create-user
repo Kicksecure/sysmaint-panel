@@ -1,0 +1,15 @@
+#!/bin/bash
+
+## Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+# This script only exists because adduser can't prompt the user for a
+# username (though deluser confusingly can).
+
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+read -p 'Enter a username for the new user: ' user_name
+adduser "${user_name}"

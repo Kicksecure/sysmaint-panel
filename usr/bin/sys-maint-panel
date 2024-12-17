@@ -1,0 +1,8 @@
+#!/usr/bin/python3 -u
+
+## Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+from sys_maint_panel import sys_maint_panel
+sys_maint_panel.main()
+print("INFO: End of System Maintenance Panel.")
