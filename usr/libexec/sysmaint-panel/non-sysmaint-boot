@@ -9,3 +9,7 @@ set -o errtrace
 set -o pipefail
 
 safe-rm -f '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+
+echo "[Desktop]
+Session=sysmaint-session" \
+   | sponge -- '/home/sysmaint/.dmrc'

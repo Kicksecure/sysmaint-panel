@@ -12,3 +12,7 @@ echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session" \
    | sponge -- '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+
+echo "[Desktop]
+Session=sysmaint-session" \
+   | sponge -- '/home/sysmaint/.dmrc'
