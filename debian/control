@@ -1,20 +1,21 @@
 # Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@kicksecure.com>
 ## See the file COPYING for copying conditions.
 
-Source: sys-maint-panel
+Source: sysmaint-panel
 Section: admin
 Priority: optional
 Maintainer: Patrick Schleizer <adrelanos@kicksecure.com>
 Build-Depends: debhelper (>= 13), debhelper-compat (= 13), python3
 Homepage: https://www.kicksecure.com/wiki/Sys_Maint_Panel
-Vcs-Browser: https://github.com/Kicksecure/sys-maint-panel
-Vcs-Git: https://github.com/Kicksecure/sys-maint-panel.git
+Vcs-Browser: https://github.com/Kicksecure/sysmaint-panel
+Vcs-Git: https://github.com/Kicksecure/sysmaint-panel.git
 Standards-Version: 4.6.2
 Rules-Requires-Root: no
 
-Package: sys-maint-panel
+Package: sysmaint-panel
 Architecture: all
 Depends: helper-scripts,
+         lightdm,
          pkexec,
          python3,
          python3-pyqt5,

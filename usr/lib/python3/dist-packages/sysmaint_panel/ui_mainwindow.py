@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/srv/data/vmshare/kicksecure/git/sys-maint-panel/ui/ui_mainwindow.ui'
+# Form implementation generated from reading ui file '/srv/data/vmshare/kicksecure/git/sysmaint-panel/ui/ui_mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #

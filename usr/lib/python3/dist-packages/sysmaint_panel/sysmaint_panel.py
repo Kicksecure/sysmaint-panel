@@ -1,10 +1,24 @@
+#!/usr/bin/python3 -u
+
+# Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@kicksecure.com>
+## See the file COPYING for copying conditions.
+
 import sys
 import subprocess
+import time
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
-from ui_mainwindow import Ui_MainWindow
-from ui_reboot import Ui_RebootDialog
-from ui_shutdown import Ui_ShutdowDialog
-from ui_installsoftware import Ui_InstallSoftwareWindow
+from PyQt5.QtCore import Qt, pyqtSignal
+from sysmaint_panel.ui_mainwindow import Ui_MainWindow
+from sysmaint_panel.ui_reboot import Ui_RebootDialog
+from sysmaint_panel.ui_shutdown import Ui_ShutdowDialog
+from sysmaint_panel.ui_installsoftware import Ui_InstallSoftwareWindow
+from sysmaint_panel.ui_background import Ui_BackgroundWindow
+
+class BackgroundWindow(QDialog):
+    def __init__(self):
+        super(BackgroundWindow, self).__init__()
+        self.ui = Ui_BackgroundWindow()
+        self.ui.setupUi(self)
 
 class InstallSoftwareWindow(QDialog):
     def __init__(self):
@@ -13,17 +27,17 @@ class InstallSoftwareWindow(QDialog):
         self.ui.setupUi(self)
         self.resize(self.minimumWidth(), self.minimumHeight())
 
-        self.ui.searchButton.clicked.connect(self.searchForPackage)
-        self.ui.installButton.clicked.connect(self.installPackage)
+        self.ui.searchButton.clicked.connect(self.search_for_package)
+        self.ui.installButton.clicked.connect(self.install_package)
         self.ui.cancelButton.clicked.connect(self.cancel)
 
-    def searchForPackage(self):
+    def search_for_package(self):
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
                           "/usr/bin/apt-cache", "search",
                           self.ui.packageLineEdit.text()])
         print(1)
 
-    def installPackage(self):
+    def install_package(self):
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
                           "/usr/bin/sudo", "/usr/bin/apt", "install",
                           self.ui.packageLineEdit.text()])
@@ -87,6 +101,13 @@ class MainWindow(QMainWindow):
         self.ui.rebootButton.clicked.connect(self.reboot)
         self.ui.shutDownButton.clicked.connect(self.shutdown)
 
+    closed = pyqtSignal()
+
+    # Overrides QMainWindow.closeEvent
+    def closeEvent(self, a0):
+        # noinspection PyUnresolvedReferences
+        self.closed.emit()
+
     @staticmethod
     def check_for_updates():
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
@@ -117,13 +138,13 @@ class MainWindow(QMainWindow):
     def change_password():
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
                           "/usr/bin/sudo",
-                          "/usr/libexec/sys-maint-panel/change-user-password"])
+                          "/usr/libexec/sysmaint-panel/change-user-password"])
 
     @staticmethod
     def create_user():
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
                          "/usr/bin/sudo",
-                         "/usr/libexec/sys-maint-panel/create-user"])
+                         "/usr/libexec/sysmaint-panel/create-user"])
 
     @staticmethod
     def remove_user():
@@ -147,8 +168,17 @@ class MainWindow(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
+    bgrd = BackgroundWindow()
+    bgrd.setWindowState(Qt.WindowFullScreen)
+    bgrd.setWindowFlags(Qt.WindowStaysOnBottomHint | Qt.WindowDoesNotAcceptFocus)
+    bgrd.show()
+    # this is annoyingly needed under XFCE to prevent a race condition where
+    # the background pops up over the main window
+    time.sleep(0.5)
     window = MainWindow()
     window.show()
+    # noinspection PyUnresolvedReferences
+    window.closed.connect(bgrd.close)
     sys.exit(app.exec_())
 
 if __name__ == "__main__":

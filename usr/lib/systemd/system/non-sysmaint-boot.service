@@ -1,0 +1,14 @@
+## Copyright (C) 2018 - 2023 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+[Unit]
+Description=Hook for ensuring non-sysmaint boots function as expected
+Before=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/libexec/sysmaint-panel/non-sysmaint-boot
+
+[Install]
+WantedBy=multi-user.target

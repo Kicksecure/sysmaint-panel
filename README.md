@@ -5,7 +5,7 @@ WARNING: Not yet stable.
 Provides a minimal session that can be booted into for system maintenance
 tasks on Linux distributions.
 
-## How to install `sys-maint-panel` using apt-get ##
+## How to install `sysmaint-panel` using apt-get ##
 
 1\. Download the APT Signing Key.
 
@@ -32,10 +32,10 @@ echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.
 sudo apt-get update
 ```
 
-5\. Install `sys-maint-panel`.
+5\. Install `sysmaint-panel`.
 
 ```
-sudo apt-get install sys-maint-panel
+sudo apt-get install sysmaint-panel
 
 ## How to Build deb Package from Source Code ##
 
@@ -47,7 +47,7 @@ dpkg-buildpackage -b
 
 See instructions.
 
-NOTE: Replace `generic-package` with the actual name of this package `sys-maint-panel`.
+NOTE: Replace `generic-package` with the actual name of this package `sysmaint-panel`.
 
 * **A)** [easy](https://www.kicksecure.com/wiki/Dev/Build_Documentation/generic-package/easy), _OR_
 * **B)** [including verifying software signatures](https://www.kicksecure.com/wiki/Dev/Build_Documentation/generic-package)
@@ -59,4 +59,4 @@ NOTE: Replace `generic-package` with the actual name of this package `sys-maint-
 
 ## Donate ##
 
-`sys-maint-panel` requires [donations](https://www.kicksecure.com/wiki/Donate) to stay alive!
+`sysmaint-panel` requires [donations](https://www.kicksecure.com/wiki/Donate) to stay alive!
