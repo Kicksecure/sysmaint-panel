@@ -154,7 +154,7 @@ class MainWindow(QMainWindow):
     @staticmethod
     def open_terminal():
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                         "/bin/bash"])
+                         "/bin/sh", "-c", "$SHELL"])
 
     @staticmethod
     def reboot():
