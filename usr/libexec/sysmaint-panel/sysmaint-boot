@@ -8,10 +8,16 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
-echo "[Seat:*]
+kernel_cmdline="$(cat /proc/cmdline)"
+
+if [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
+   echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session" \
-   | sponge -- '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+      | sponge -- '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+else
+   safe-rm -f '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+fi
 
 echo "[Desktop]
 Session=sysmaint-session" \

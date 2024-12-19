@@ -2,7 +2,8 @@
 ## See the file COPYING for copying conditions.
 
 [Unit]
-Description=Hook for ensuring sysmaint graphical session works
+Description=Hook for sysmaint autologin
+Before=multi-user.target
 Before=sysmaint-boot.target
 
 [Service]
@@ -11,4 +12,4 @@ RemainAfterExit=yes
 ExecStart=/usr/libexec/sysmaint-panel/sysmaint-boot
 
 [Install]
-WantedBy=sysmaint-boot.target
+WantedBy=basic.target
