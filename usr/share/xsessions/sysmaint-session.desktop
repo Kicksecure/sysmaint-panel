@@ -1,7 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Sysmaint Session
-Exec=/usr/libexec/sysmaint-panel/sysmaint-session
-Icon=
-Type=Application
-DesktopNames=sysmaint-session

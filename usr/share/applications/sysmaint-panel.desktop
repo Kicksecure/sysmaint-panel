@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=System Maintenance Panel
+Comment=Perform common system maintenance tasks
+Keywords=System;Maintenance;Control;Sysmaint;Admin;
+Exec=sysmaint-panel
+TryExec=sysmaint-panel
+Terminal=false
+Type=Application
+Categories=System;
+Icon=system-software-update

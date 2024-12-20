@@ -11,15 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_BackgroundWindow(object):
-    def setupUi(self, BackgroundWindow):
-        BackgroundWindow.setObjectName("BackgroundWindow")
-        BackgroundWindow.resize(400, 300)
-        BackgroundWindow.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #3b187b, stop:1 #a9def2);")
+class Ui_BackgroundScreen(object):
+    def setupUi(self, BackgroundScreen):
+        BackgroundScreen.setObjectName("BackgroundScreen")
+        BackgroundScreen.resize(400, 300)
+        BackgroundScreen.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #3b187b, stop:1 #a9def2);")
 
-        self.retranslateUi(BackgroundWindow)
-        QtCore.QMetaObject.connectSlotsByName(BackgroundWindow)
+        self.retranslateUi(BackgroundScreen)
+        QtCore.QMetaObject.connectSlotsByName(BackgroundScreen)
 
-    def retranslateUi(self, BackgroundWindow):
+    def retranslateUi(self, BackgroundScreen):
         _translate = QtCore.QCoreApplication.translate
-        BackgroundWindow.setWindowTitle(_translate("BackgroundWindow", "Background Window"))
+        BackgroundScreen.setWindowTitle(_translate("BackgroundScreen", "Background Window"))
