@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>BackgroundWindow</class>
- <widget class="QDialog" name="BackgroundWindow">
+ <class>BackgroundScreen</class>
+ <widget class="QDialog" name="BackgroundScreen">
   <property name="geometry">
    <rect>
     <x>0</x>
