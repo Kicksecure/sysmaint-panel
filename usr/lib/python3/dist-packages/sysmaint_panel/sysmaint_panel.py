@@ -5,9 +5,9 @@
 
 import sys
 import subprocess
-import time
 import os
 import grp
+
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, pyqtSignal, QEvent
 
@@ -217,22 +217,20 @@ def main():
             npwin.show()
             sys.exit(app.exec_())
 
-    bgrd = BackgroundScreen()
-    bgrd.setWindowState(Qt.WindowFullScreen)
-    bgrd.setWindowFlags(Qt.WindowStaysOnBottomHint
-                        | Qt.WindowDoesNotAcceptFocus)
-    if xdg_current_desktop == "sysmaint-session":
-        bgrd.show()
-        # this is annoyingly needed under xfwm4 to prevent a race condition
-        # where the background pops up over the main window
-        time.sleep(0.5)
-
     window = MainWindow()
     window.show()
 
     if xdg_current_desktop == "sysmaint-session":
-        # noinspection PyUnresolvedReferences
-        window.closed.connect(bgrd.close)
+        bgrd_list = []
+        for screen in app.screens():
+            bgrd = BackgroundScreen()
+            bgrd.setGeometry(screen.geometry())
+            bgrd.setWindowFlags(Qt.WindowStaysOnBottomHint
+                                | Qt.WindowDoesNotAcceptFocus)
+            bgrd.showFullScreen()
+            # noinspection PyUnresolvedReferences
+            window.closed.connect(bgrd.close)
+            bgrd_list.append(bgrd)
 
     sys.exit(app.exec_())
 
