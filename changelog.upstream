@@ -1,0 +1,91 @@
+commit 861d5034c3b53d9d16c3e1c0c6044c80133970f3
+Merge: e2da594 3e3a51c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 24 00:13:29 2024 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 3e3a51c25acfcda229f1d33fe9b98847f24a2124
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Dec 23 22:14:30 2024 -0600
+
+    Add support for launching Calamares
+
+commit c0d1fc5848744f52a5f7b93084d00da4e1b86cf8
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Dec 20 12:17:11 2024 -0600
+
+    Fix multi-monitor support, keep __pycache__ from getting added
+
+commit e2da59464357d88072e271fd0ee1015361ed8934
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 20 03:16:26 2024 -0500
+
+    remove pyc file
+
+commit 5ecb4affbd7de495f4313b687866a6397209ead4
+Merge: ac5c2e3 73271e9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 20 03:15:54 2024 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 73271e9da8059e0b87f8ed2c3ce735f42f02b81d
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Dec 20 01:32:06 2024 -0600
+
+    Overhaul
+
+commit 77a66c3f0c54b7bb161810157631b4d2b71c6f5c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Dec 19 01:07:29 2024 -0600
+
+    Simplify boot code and systemd config
+
+commit f397ca6168078e296862b1c6c3b00ef28699031e
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 23:43:50 2024 -0600
+
+    Actually fix package version number
+
+commit 5c980aa5c564f67aaeb9566e2009576e8f784284
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 21:40:12 2024 -0600
+
+    Adjust systemd config comments, rename services, move sysmaint-boot.target to user-sysmaint-split
+
+commit e9f91bad319fe13ac91143e9c6f6eecf72be2b94
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 21:36:49 2024 -0600
+
+    Fix shell launcher
+
+commit 2d415ebce16ee7aa73d4a6c216abfaa502bfb8cf
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 21:36:25 2024 -0600
+
+    Change version to match user-sysmaint-split
+
+commit ac5c2e3571ddf7e03847db7e153995ea92ea0969
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 00:29:08 2024 -0600
+
+    Make it harder to log into the sysmaint user with the wrong session
+
+commit 6639d10aa38894bf1967c1b671b3325d4da8e90c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 00:25:06 2024 -0600
+
+    Disable logging into the sysmaint user with a non-sysmaint session
+
+commit 84e2fdf6f99340a4996d8311e09800401a145783
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Dec 17 23:55:32 2024 -0600
+
+    Rename to sysmaint-panel, add login session and boot mode, fix bugs
+
+commit 1e4ad47a9740be3dc5df390cf1fa7d6339fe3678
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Dec 16 19:54:15 2024 -0600
+
+    Initial commit
