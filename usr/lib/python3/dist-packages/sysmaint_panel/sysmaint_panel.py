@@ -111,6 +111,8 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.resize(self.minimumWidth(), self.minimumHeight())
 
+        self.ui.installSystemButton.clicked.connect(self.install_system)
+
         self.ui.checkForUpdatesButton.clicked.connect(self.check_for_updates)
         self.ui.installUpdatesButton.clicked.connect(self.install_updates)
         self.ui.removeUnusedPackagesButton.clicked.connect(self.remove_unused_packages)
@@ -146,6 +148,11 @@ class MainWindow(QMainWindow):
                 return True
 
         return super(MainWindow, self).event(e)
+
+    @staticmethod
+    def install_system():
+        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
+                          "/usr/bin/install-host"])
 
     @staticmethod
     def check_for_updates():
@@ -218,6 +225,10 @@ def main():
             sys.exit(app.exec_())
 
     window = MainWindow()
+
+    if not "rd.live.image" in kernel_cmdline:
+        window.ui.installationGroupBox.setVisible(False)
+
     window.show()
 
     if xdg_current_desktop == "sysmaint-session":
@@ -240,6 +251,9 @@ if "XDG_CURRENT_DESKTOP" in os.environ:
 default_shell = "/bin/bash"
 if "SHELL" in os.environ:
     default_shell = os.environ["SHELL"]
+
+with open("/proc/cmdline", "r") as kernel_cmdline_file:
+    kernel_cmdline = kernel_cmdline_file.read()
 
 if __name__ == "__main__":
     main()
