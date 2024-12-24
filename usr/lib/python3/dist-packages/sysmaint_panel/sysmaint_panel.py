@@ -5,9 +5,9 @@
 
 import sys
 import subprocess
-import time
 import os
 import grp
+
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, pyqtSignal, QEvent
 
@@ -111,6 +111,8 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.resize(self.minimumWidth(), self.minimumHeight())
 
+        self.ui.installSystemButton.clicked.connect(self.install_system)
+
         self.ui.checkForUpdatesButton.clicked.connect(self.check_for_updates)
         self.ui.installUpdatesButton.clicked.connect(self.install_updates)
         self.ui.removeUnusedPackagesButton.clicked.connect(self.remove_unused_packages)
@@ -146,6 +148,11 @@ class MainWindow(QMainWindow):
                 return True
 
         return super(MainWindow, self).event(e)
+
+    @staticmethod
+    def install_system():
+        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
+                          "/usr/bin/install-host"])
 
     @staticmethod
     def check_for_updates():
@@ -217,22 +224,24 @@ def main():
             npwin.show()
             sys.exit(app.exec_())
 
-    bgrd = BackgroundScreen()
-    bgrd.setWindowState(Qt.WindowFullScreen)
-    bgrd.setWindowFlags(Qt.WindowStaysOnBottomHint
-                        | Qt.WindowDoesNotAcceptFocus)
-    if xdg_current_desktop == "sysmaint-session":
-        bgrd.show()
-        # this is annoyingly needed under xfwm4 to prevent a race condition
-        # where the background pops up over the main window
-        time.sleep(0.5)
-
     window = MainWindow()
+
+    if not "rd.live.image" in kernel_cmdline:
+        window.ui.installationGroupBox.setVisible(False)
+
     window.show()
 
     if xdg_current_desktop == "sysmaint-session":
-        # noinspection PyUnresolvedReferences
-        window.closed.connect(bgrd.close)
+        bgrd_list = []
+        for screen in app.screens():
+            bgrd = BackgroundScreen()
+            bgrd.setGeometry(screen.geometry())
+            bgrd.setWindowFlags(Qt.WindowStaysOnBottomHint
+                                | Qt.WindowDoesNotAcceptFocus)
+            bgrd.showFullScreen()
+            # noinspection PyUnresolvedReferences
+            window.closed.connect(bgrd.close)
+            bgrd_list.append(bgrd)
 
     sys.exit(app.exec_())
 
@@ -242,6 +251,9 @@ if "XDG_CURRENT_DESKTOP" in os.environ:
 default_shell = "/bin/bash"
 if "SHELL" in os.environ:
     default_shell = os.environ["SHELL"]
+
+with open("/proc/cmdline", "r") as kernel_cmdline_file:
+    kernel_cmdline = kernel_cmdline_file.read()
 
 if __name__ == "__main__":
     main()
