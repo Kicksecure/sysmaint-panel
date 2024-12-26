@@ -184,7 +184,7 @@ class MainWindow(QMainWindow):
     def change_password():
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
                           "/usr/bin/sudo",
-                          "/usr/libexec/sysmaint-panel/change-user-password"])
+                          "/usr/sbin/pwchange"])
 
     @staticmethod
     def create_user():
