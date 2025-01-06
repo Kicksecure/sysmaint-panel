@@ -24,7 +24,8 @@ sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
 3\. Add the derivative repository.
 
 ```
-echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bookworm main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list```
+echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bookworm main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list
+```
 
 4\. Update your package lists.
 
@@ -36,6 +37,7 @@ sudo apt-get update
 
 ```
 sudo apt-get install sysmaint-panel
+```
 
 ## How to Build deb Package from Source Code ##
 
