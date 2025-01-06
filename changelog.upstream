@@ -1,3 +1,15 @@
+commit d74dbbeba28a5029c46e249e143be807db6c8d96
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 08:11:01 2025 -0500
+
+    readme
+
+commit 8762876375eb7af04eceeac12f5976f1351cdaa7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 31 18:43:35 2024 +0000
+
+    bumped changelog version
+
 commit da976738b94c20d599ce61e4d4cf851b6a1977e5
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Dec 31 13:26:22 2024 -0500
