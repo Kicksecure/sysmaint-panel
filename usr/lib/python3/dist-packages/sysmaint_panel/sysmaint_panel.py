@@ -1,6 +1,6 @@
 #!/usr/bin/python3 -u
 
-# Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@kicksecure.com>
+# Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@kicksecure.com>
 ## See the file COPYING for copying conditions.
 
 import sys
