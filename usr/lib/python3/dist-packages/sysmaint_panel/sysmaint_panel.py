@@ -17,6 +17,7 @@ from sysmaint_panel.ui_shutdown import Ui_ShutdownDialog
 from sysmaint_panel.ui_installsoftware import Ui_InstallSoftwareDialog
 from sysmaint_panel.ui_background import Ui_BackgroundScreen
 from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
+from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 
 #from ui_mainwindow import Ui_MainWindow
 #from ui_reboot import Ui_RebootDialog
@@ -24,6 +25,7 @@ from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
 #from ui_installsoftware import Ui_InstallSoftwareDialog
 #from ui_background import Ui_BackgroundScreen
 #from ui_nopriv import Ui_NoPrivDialog
+#from ui_uninstall import Ui_UninstallDialog
 
 # Honor sigterm
 import signal
@@ -103,6 +105,45 @@ class ShutdownWindow(QDialog):
 
     def cancel(self):
         self.done(0)
+
+class UninstallDialog(QDialog):
+    def __init__(self):
+        super(UninstallDialog, self).__init__()
+        self.ui = Ui_UninstallDialog()
+        self.ui.setupUi(self)
+        self.resize(self.minimumWidth(), self.minimumHeight())
+        self.ui.okButton.setEnabled(False)
+
+        self.ui.okButton.clicked.connect(self.uninstall)
+        self.ui.cancelButton.clicked.connect(self.cancel)
+        self.ui.textField.textEdited.connect(self.check_text)
+
+    closed = pyqtSignal()
+
+    # Overrides QMainWindow.closeEvent
+    def closeEvent(self, e):
+        if xdg_current_desktop == "sysmaint-session":
+            e.ignore()
+            self.cancel()
+        else:
+            # noinspection PyUnresolvedReferences
+            self.closed.emit()
+
+    def check_text(self, text):
+        if text == "yes":
+            self.ui.okButton.setEnabled(True)
+        else:
+            self.ui.okButton.setEnabled(False)
+
+    @staticmethod
+    def uninstall():
+        subprocess.run(["/usr/libexec/helper-scripts/terminal-wrapper",
+                       "/usr/bin/sudo", "/usr/bin/apt", "purge",
+                       "user-sysmaint-split"])
+        subprocess.run(["/usr/sbin/reboot"])
+
+    def cancel(self):
+        subprocess.run(["/usr/sbin/reboot"])
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -224,10 +265,12 @@ def main():
             npwin.show()
             sys.exit(app.exec_())
 
-    window = MainWindow()
-
-    if not "rd.live.image" in kernel_cmdline:
-        window.ui.installationGroupBox.setVisible(False)
+    if "remove-sysmaint" in kernel_cmdline:
+        window = UninstallDialog()
+    else:
+        window = MainWindow()
+        if not "rd.live.image" in kernel_cmdline and not "remove-sysmaint" in kernel_cmdline:
+            window.ui.installationGroupBox.setVisible(False)
 
     window.show()
 
