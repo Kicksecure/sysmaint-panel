@@ -1,3 +1,28 @@
+commit a6d8e0f2ba54a22e7b9b2976fdd59bf843db2bdb
+Merge: 3751541 2204130
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Feb 6 08:33:39 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 2204130a70544833dae03bf2297f113ca83d221d
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Feb 4 23:56:27 2025 -0600
+
+    Add feature for uninstalling user-sysmaint-split
+
+commit e2e2e8ada04d3d6405467d2c3fb5ab7800f529e8
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Feb 4 19:38:44 2025 -0500
+
+    Fix copyright file
+
+commit 37515418ba7f66f9f34d91407d2373da88a73a9b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jan 23 16:30:31 2025 +0000
+
+    bumped changelog version
+
 commit feb1e254e75ce4295c2a518317f7ab82c7890fb5
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Jan 23 11:12:39 2025 -0500
