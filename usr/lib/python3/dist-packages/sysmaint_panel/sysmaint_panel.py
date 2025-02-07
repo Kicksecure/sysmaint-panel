@@ -137,9 +137,9 @@ class UninstallDialog(QDialog):
 
     @staticmethod
     def uninstall():
-        subprocess.run(["/usr/libexec/helper-scripts/terminal-wrapper",
-                       "/usr/bin/sudo", "/usr/bin/apt", "purge",
-                       "user-sysmaint-split"])
+        subprocess.run([ "/usr/libexec/helper-scripts/terminal-wrapper",
+                         "/usr/bin/sudo", "/usr/bin/dummy-dependency", "--yes",
+                         "--purge", "user-sysmaint-split" ])
         subprocess.run(["/usr/sbin/reboot"])
 
     def cancel(self):
