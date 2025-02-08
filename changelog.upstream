@@ -1,3 +1,22 @@
+commit e4ced71aaa6c9b8740d77aa6db2fe3a7dc006c23
+Merge: cae159c 63a4031
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Feb 8 05:45:51 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 63a40319e3c8e267599d34ce75a0659bf10c0ba5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Feb 7 15:28:00 2025 -0600
+
+    Purge user-sysmaint-split using dummy-dependency in uninstaller
+
+commit cae159c275d91e766667d50980964ce4a63c5797
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Feb 6 14:58:14 2025 +0000
+
+    bumped changelog version
+
 commit a6d8e0f2ba54a22e7b9b2976fdd59bf843db2bdb
 Merge: 3751541 2204130
 Author: Patrick Schleizer <adrelanos@whonix.org>

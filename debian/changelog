@@ -1,3 +1,9 @@
+sysmaint-panel (3:0.8-1) unstable; urgency=medium
+
+  * New upstream version (local package).
+
+ -- Patrick Schleizer <adrelanos@whonix.org>  Sat, 08 Feb 2025 11:30:06 +0000
+
 sysmaint-panel (3:0.7-1) unstable; urgency=medium
 
   * New upstream version (local package).
