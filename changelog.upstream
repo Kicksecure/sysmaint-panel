@@ -1,3 +1,22 @@
+commit 1e8568eea0528cb60702991e12d9f4c36fd657ba
+Merge: 8c57bbd 7b825b9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Feb 13 17:54:27 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 7b825b9119562d69ef244c8c45ea88d2ee63ec11
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Feb 10 19:00:49 2025 -0600
+
+    Remove lightdm dependency
+
+commit 8c57bbddb707c6283cd3af15a03ff6b86f7e3adc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Feb 8 11:30:07 2025 +0000
+
+    bumped changelog version
+
 commit e4ced71aaa6c9b8740d77aa6db2fe3a7dc006c23
 Merge: cae159c 63a4031
 Author: Patrick Schleizer <adrelanos@whonix.org>
