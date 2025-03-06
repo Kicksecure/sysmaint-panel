@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>393</width>
-    <height>588</height>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -133,13 +133,20 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
+       <item row="2" column="0" colspan="2">
         <widget class="QPushButton" name="installSoftwareButton">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allows you to search for and install software through the apt package manager.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>Install Software</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="autologinToggleButton">
+         <property name="text">
+          <string>toggle_autologin</string>
          </property>
         </widget>
        </item>

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(393, 588)
+        MainWindow.resize(393, 632)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.centralwidget)
@@ -58,7 +58,10 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addWidget(self.changePasswordButton, 1, 0, 1, 1)
         self.installSoftwareButton = QtWidgets.QPushButton(self.systemAdministrationGroupBox)
         self.installSoftwareButton.setObjectName("installSoftwareButton")
-        self.gridLayout_2.addWidget(self.installSoftwareButton, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.installSoftwareButton, 2, 0, 1, 2)
+        self.autologinToggleButton = QtWidgets.QPushButton(self.systemAdministrationGroupBox)
+        self.autologinToggleButton.setObjectName("autologinToggleButton")
+        self.gridLayout_2.addWidget(self.autologinToggleButton, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.systemAdministrationGroupBox, 3, 1, 1, 1)
         self.miscGroupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.miscGroupBox.setObjectName("miscGroupBox")
@@ -109,6 +112,7 @@ class Ui_MainWindow(object):
         self.changePasswordButton.setText(_translate("MainWindow", "Change Password"))
         self.installSoftwareButton.setToolTip(_translate("MainWindow", "<html><head/><body><p>Allows you to search for and install software through the apt package manager.</p></body></html>"))
         self.installSoftwareButton.setText(_translate("MainWindow", "Install Software"))
+        self.autologinToggleButton.setText(_translate("MainWindow", "toggle_autologin"))
         self.miscGroupBox.setTitle(_translate("MainWindow", "Misc"))
         self.openTerminalButton.setToolTip(_translate("MainWindow", "<html><head/><body><p>Opens a terminal window. Use this for advanced maintenance tasks.</p></body></html>"))
         self.openTerminalButton.setText(_translate("MainWindow", "Open Terminal"))

@@ -9,7 +9,7 @@ import os
 import grp
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
-from PyQt5.QtCore import Qt, pyqtSignal, QEvent
+from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QProcess
 
 from sysmaint_panel.ui_mainwindow import Ui_MainWindow
 from sysmaint_panel.ui_reboot import Ui_RebootDialog
@@ -163,6 +163,7 @@ class MainWindow(QMainWindow):
         self.ui.changePasswordButton.clicked.connect(self.change_password)
         self.ui.createUserButton.clicked.connect(self.create_user)
         self.ui.removeUserButton.clicked.connect(self.remove_user)
+        self.ui.autologinToggleButton.clicked.connect(self.toggle_autologin)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
         self.ui.rebootButton.clicked.connect(self.reboot)
@@ -238,6 +239,24 @@ class MainWindow(QMainWindow):
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
                           "/usr/bin/sudo", "/usr/sbin/deluser"])
 
+    def refresh_autologin_button(self):
+        autologin_check = subprocess.run(["/usr/sbin/autologinchange -c"],
+            capture_output=True)
+        if autologin_check.returncode == 0:
+            # Autologin enabled, offer to disable it
+            self.ui.autologinToggleButton.setText("Disable Autologin")
+        else:
+            # Autologin disabled, offer to enable it
+            self.ui.autologinToggleButton.setText("Enable Autologin")
+
+    def toggle_autologin(self):
+        # We need Qt signals here to catch when the user closes the
+        # autologin config window, so we use QProcess rather than subprocess.
+        proc = QProcess()
+        proc.setProgram("/usr/libexec/helper-scripts/terminal-wrapper")
+        proc.setArguments([ "/usr/bin/sudo", "/usr/sbin/autologinchange"])
+        proc.finished.connect(self.refresh_autologin_button)
+
     @staticmethod
     def open_terminal():
         subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
@@ -271,6 +290,14 @@ def main():
         window = MainWindow()
         if not "rd.live.image" in kernel_cmdline and not "remove-sysmaint" in kernel_cmdline:
             window.ui.installationGroupBox.setVisible(False)
+        autologin_check = subprocess.run(["/usr/sbin/autologinchange -c"],
+            capture_output=True)
+        if autologin_check.returncode == 0:
+            # Autologin enabled, offer to disable it
+            window.ui.autologinToggleButton.setText("Disable Autologin")
+        else:
+            # Autologin disabled, offer to enable it
+            window.ui.autologinToggleButton.setText("Enable Autologin")
 
     window.show()
 
