@@ -19,17 +19,19 @@ from sysmaint_panel.ui_background import Ui_BackgroundScreen
 from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
 from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 
-#from ui_mainwindow import Ui_MainWindow
-#from ui_reboot import Ui_RebootDialog
-#from ui_shutdown import Ui_ShutdownDialog
-#from ui_installsoftware import Ui_InstallSoftwareDialog
-#from ui_background import Ui_BackgroundScreen
-#from ui_nopriv import Ui_NoPrivDialog
-#from ui_uninstall import Ui_UninstallDialog
+# from ui_mainwindow import Ui_MainWindow
+# from ui_reboot import Ui_RebootDialog
+# from ui_shutdown import Ui_ShutdownDialog
+# from ui_installsoftware import Ui_InstallSoftwareDialog
+# from ui_background import Ui_BackgroundScreen
+# from ui_nopriv import Ui_NoPrivDialog
+# from ui_uninstall import Ui_UninstallDialog
 
 # Honor sigterm
 import signal
+
 signal.signal(signal.SIGINT, signal.SIG_DFL)
+
 
 class NoPrivDialog(QDialog):
     def __init__(self):
@@ -40,11 +42,13 @@ class NoPrivDialog(QDialog):
 
         self.ui.okButton.clicked.connect(self.done)
 
+
 class BackgroundScreen(QDialog):
     def __init__(self):
         super(BackgroundScreen, self).__init__()
         self.ui = Ui_BackgroundScreen()
         self.ui.setupUi(self)
+
 
 class InstallSoftwareDialog(QDialog):
     def __init__(self):
@@ -58,19 +62,31 @@ class InstallSoftwareDialog(QDialog):
         self.ui.cancelButton.clicked.connect(self.cancel)
 
     def search_for_package(self):
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/apt-cache", "search",
-                          self.ui.packageLineEdit.text()])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/apt-cache",
+                "search",
+                self.ui.packageLineEdit.text(),
+            ]
+        )
         print(1)
 
     def install_package(self):
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/sudo", "/usr/bin/apt", "install",
-                          self.ui.packageLineEdit.text()])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/bin/apt",
+                "install",
+                self.ui.packageLineEdit.text(),
+            ]
+        )
         self.done(0)
 
     def cancel(self):
         self.done(0)
+
 
 class RebootWindow(QDialog):
     def __init__(self):
@@ -89,6 +105,7 @@ class RebootWindow(QDialog):
     def cancel(self):
         self.done(0)
 
+
 class ShutdownWindow(QDialog):
     def __init__(self):
         super(ShutdownWindow, self).__init__()
@@ -105,6 +122,7 @@ class ShutdownWindow(QDialog):
 
     def cancel(self):
         self.done(0)
+
 
 class UninstallDialog(QDialog):
     def __init__(self):
@@ -137,13 +155,21 @@ class UninstallDialog(QDialog):
 
     @staticmethod
     def uninstall():
-        subprocess.run([ "/usr/libexec/helper-scripts/terminal-wrapper",
-                         "/usr/bin/sudo", "/usr/bin/dummy-dependency", "--yes",
-                         "--purge", "user-sysmaint-split" ])
+        subprocess.run(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/bin/dummy-dependency",
+                "--yes",
+                "--purge",
+                "user-sysmaint-split",
+            ]
+        )
         subprocess.run(["/usr/sbin/reboot"])
 
     def cancel(self):
         subprocess.run(["/usr/sbin/reboot"])
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -156,8 +182,12 @@ class MainWindow(QMainWindow):
 
         self.ui.checkForUpdatesButton.clicked.connect(self.check_for_updates)
         self.ui.installUpdatesButton.clicked.connect(self.install_updates)
-        self.ui.removeUnusedPackagesButton.clicked.connect(self.remove_unused_packages)
-        self.ui.purgeUnusedPackagesButton.clicked.connect(self.purge_unused_packages)
+        self.ui.removeUnusedPackagesButton.clicked.connect(
+            self.remove_unused_packages
+        )
+        self.ui.purgeUnusedPackagesButton.clicked.connect(
+            self.purge_unused_packages
+        )
 
         self.ui.installSoftwareButton.clicked.connect(self.install_software)
         self.ui.changePasswordButton.clicked.connect(self.change_password)
@@ -183,7 +213,10 @@ class MainWindow(QMainWindow):
 
     # Overrides QMainWindow.event
     def event(self, e):
-        if e.type() == QEvent.WindowStateChange and (self.windowState() & Qt.WindowMinimized) == Qt.WindowMinimized:
+        if (
+            e.type() == QEvent.WindowStateChange
+            and (self.windowState() & Qt.WindowMinimized) == Qt.WindowMinimized
+        ):
             if xdg_current_desktop == "sysmaint-session":
                 e.ignore()
                 self.setWindowState(e.oldState())
@@ -193,29 +226,56 @@ class MainWindow(QMainWindow):
 
     @staticmethod
     def install_system():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/install-host"])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/install-host",
+            ]
+        )
 
     @staticmethod
     def check_for_updates():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/sudo", "/usr/bin/apt", "update"])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/bin/apt",
+                "update",
+            ]
+        )
 
     @staticmethod
     def install_updates():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/sudo", "/usr/bin/apt",
-                          "full-upgrade"])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/bin/apt",
+                "full-upgrade",
+            ]
+        )
 
     @staticmethod
     def remove_unused_packages():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/sudo", "/usr/bin/apt", "autoremove"])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/bin/apt",
+                "autoremove",
+            ]
+        )
 
     @staticmethod
     def purge_unused_packages():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/sudo", "/usr/bin/apt", "autopurge"])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/bin/apt",
+                "autopurge",
+            ]
+        )
 
     @staticmethod
     def install_software():
@@ -224,24 +284,38 @@ class MainWindow(QMainWindow):
 
     @staticmethod
     def change_password():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/sudo",
-                          "/usr/sbin/pwchange"])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/pwchange",
+            ]
+        )
 
     @staticmethod
     def create_user():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                         "/usr/bin/sudo",
-                         "/usr/libexec/sysmaint-panel/create-user"])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/libexec/sysmaint-panel/create-user",
+            ]
+        )
 
     @staticmethod
     def remove_user():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                          "/usr/bin/sudo", "/usr/sbin/deluser"])
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/deluser",
+            ]
+        )
 
     def refresh_autologin_button(self):
-        autologin_check = subprocess.run(["/usr/sbin/autologinchange -c"],
-            capture_output=True)
+        autologin_check = subprocess.run(
+            ["/usr/sbin/autologinchange -c"], capture_output=True
+        )
         if autologin_check.returncode == 0:
             # Autologin enabled, offer to disable it
             self.ui.autologinToggleButton.setText("Disable Autologin")
@@ -254,13 +328,14 @@ class MainWindow(QMainWindow):
         # autologin config window, so we use QProcess rather than subprocess.
         proc = QProcess()
         proc.setProgram("/usr/libexec/helper-scripts/terminal-wrapper")
-        proc.setArguments([ "/usr/bin/sudo", "/usr/sbin/autologinchange"])
+        proc.setArguments(["/usr/bin/sudo", "/usr/sbin/autologinchange"])
         proc.finished.connect(self.refresh_autologin_button)
 
     @staticmethod
     def open_terminal():
-        subprocess.Popen(["/usr/libexec/helper-scripts/terminal-wrapper",
-                         default_shell])
+        subprocess.Popen(
+            ["/usr/libexec/helper-scripts/terminal-wrapper", default_shell]
+        )
 
     @staticmethod
     def reboot():
@@ -271,6 +346,7 @@ class MainWindow(QMainWindow):
     def shutdown():
         shutdown_window = ShutdownWindow()
         shutdown_window.exec()
+
 
 def main():
     app = QApplication(sys.argv)
@@ -288,10 +364,14 @@ def main():
         window = UninstallDialog()
     else:
         window = MainWindow()
-        if not "rd.live.image" in kernel_cmdline and not "remove-sysmaint" in kernel_cmdline:
+        if (
+            not "rd.live.image" in kernel_cmdline
+            and not "remove-sysmaint" in kernel_cmdline
+        ):
             window.ui.installationGroupBox.setVisible(False)
-        autologin_check = subprocess.run(["/usr/sbin/autologinchange -c"],
-            capture_output=True)
+        autologin_check = subprocess.run(
+            ["/usr/sbin/autologinchange -c"], capture_output=True
+        )
         if autologin_check.returncode == 0:
             # Autologin enabled, offer to disable it
             window.ui.autologinToggleButton.setText("Disable Autologin")
@@ -306,14 +386,16 @@ def main():
         for screen in app.screens():
             bgrd = BackgroundScreen()
             bgrd.setGeometry(screen.geometry())
-            bgrd.setWindowFlags(Qt.WindowStaysOnBottomHint
-                                | Qt.WindowDoesNotAcceptFocus)
+            bgrd.setWindowFlags(
+                Qt.WindowStaysOnBottomHint | Qt.WindowDoesNotAcceptFocus
+            )
             bgrd.showFullScreen()
             # noinspection PyUnresolvedReferences
             window.closed.connect(bgrd.close)
             bgrd_list.append(bgrd)
 
     sys.exit(app.exec_())
+
 
 xdg_current_desktop = ""
 if "XDG_CURRENT_DESKTOP" in os.environ:
