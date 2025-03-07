@@ -167,7 +167,8 @@ class UninstallDialog(QDialog):
         )
         subprocess.run(["/usr/sbin/reboot"])
 
-    def cancel(self):
+    @staticmethod
+    def cancel():
         subprocess.run(["/usr/sbin/reboot"])
 
 
@@ -189,11 +190,14 @@ class MainWindow(QMainWindow):
             self.purge_unused_packages
         )
 
-        self.ui.installSoftwareButton.clicked.connect(self.install_software)
-        self.ui.changePasswordButton.clicked.connect(self.change_password)
+        self.ui.managePasswordsButton.clicked.connect(self.manage_passwords)
+        self.ui.manageAutologinButton.clicked.connect(self.manage_autologin)
+        self.ui.checkSystemStatusButton.clicked.connect(
+            self.check_system_status
+        )
         self.ui.createUserButton.clicked.connect(self.create_user)
         self.ui.removeUserButton.clicked.connect(self.remove_user)
-        self.ui.autologinToggleButton.clicked.connect(self.toggle_autologin)
+        self.ui.installSoftwareButton.clicked.connect(self.install_software)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
         self.ui.rebootButton.clicked.connect(self.reboot)
@@ -283,7 +287,7 @@ class MainWindow(QMainWindow):
         install_software_window.exec()
 
     @staticmethod
-    def change_password():
+    def manage_passwords():
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -312,24 +316,19 @@ class MainWindow(QMainWindow):
             ]
         )
 
-    def refresh_autologin_button(self):
-        autologin_check = subprocess.run(
-            ["/usr/sbin/autologinchange -c"], capture_output=True
+    @staticmethod
+    def manage_autologin():
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/autologinchange",
+            ]
         )
-        if autologin_check.returncode == 0:
-            # Autologin enabled, offer to disable it
-            self.ui.autologinToggleButton.setText("Disable Autologin")
-        else:
-            # Autologin disabled, offer to enable it
-            self.ui.autologinToggleButton.setText("Enable Autologin")
 
-    def toggle_autologin(self):
-        # We need Qt signals here to catch when the user closes the
-        # autologin config window, so we use QProcess rather than subprocess.
-        proc = QProcess()
-        proc.setProgram("/usr/libexec/helper-scripts/terminal-wrapper")
-        proc.setArguments(["/usr/bin/sudo", "/usr/sbin/autologinchange"])
-        proc.finished.connect(self.refresh_autologin_button)
+    @staticmethod
+    def check_system_status():
+        subprocess.Popen(["/usr/bin/systemcheck"])
 
     @staticmethod
     def open_terminal():
@@ -369,15 +368,6 @@ def main():
             and not "remove-sysmaint" in kernel_cmdline
         ):
             window.ui.installationGroupBox.setVisible(False)
-        autologin_check = subprocess.run(
-            ["/usr/sbin/autologinchange -c"], capture_output=True
-        )
-        if autologin_check.returncode == 0:
-            # Autologin enabled, offer to disable it
-            window.ui.autologinToggleButton.setText("Disable Autologin")
-        else:
-            # Autologin disabled, offer to enable it
-            window.ui.autologinToggleButton.setText("Enable Autologin")
 
     window.show()
 
