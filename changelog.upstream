@@ -1,3 +1,22 @@
+commit 7e3a5fc7943ff012bb18c3cc7fc7dc65a159dc5f
+Merge: 5c257e3 c9f5443
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Mar 18 06:44:22 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/autologin'
+
+commit c9f54432231df0ee42e894d514278230eeabd8e5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Mar 17 23:41:28 2025 -0500
+
+    Clarify autologin button
+
+commit 5c257e321058aba392027e73044bcae2dac04e9c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 11:04:09 2025 +0000
+
+    bumped changelog version
+
 commit 1a703c266177146b3d3bcd0fefe92d50475b6890
 Merge: 7d6ec0c f13c361
 Author: Patrick Schleizer <adrelanos@whonix.org>
