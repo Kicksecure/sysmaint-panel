@@ -149,7 +149,7 @@
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enables or disables autologin for a user account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
-          <string>Manage Autologin</string>
+          <string>Manage GUI Autologin</string>
          </property>
         </widget>
        </item>

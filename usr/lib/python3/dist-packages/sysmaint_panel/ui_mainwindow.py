@@ -109,7 +109,7 @@ class Ui_MainWindow(object):
         self.checkSystemStatusButton.setToolTip(_translate("MainWindow", "<html><head/><body><p>Runs the System Check utility.</p></body></html>"))
         self.checkSystemStatusButton.setText(_translate("MainWindow", "Check System Status"))
         self.manageAutologinButton.setToolTip(_translate("MainWindow", "<html><head/><body><p>Enables or disables autologin for a user account.</p></body></html>"))
-        self.manageAutologinButton.setText(_translate("MainWindow", "Manage Autologin"))
+        self.manageAutologinButton.setText(_translate("MainWindow", "Manage GUI Autologin"))
         self.managePasswordsButton.setToolTip(_translate("MainWindow", "<html><head/><body><p>Changes the password for a user account.</p></body></html>"))
         self.managePasswordsButton.setText(_translate("MainWindow", "Manage Passwords"))
         self.miscGroupBox.setTitle(_translate("MainWindow", "Misc"))
