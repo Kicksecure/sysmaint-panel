@@ -7,6 +7,7 @@ import sys
 import subprocess
 import os
 import grp
+from pathlib import Path
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QProcess
@@ -31,6 +32,10 @@ from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 import signal
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+
+def is_qubes_os():
+    return Path("/usr/share/qubes/marker-vm").exists()
 
 
 class NoPrivDialog(QDialog):
@@ -207,7 +212,7 @@ class MainWindow(QMainWindow):
 
     # Overrides QMainWindow.closeEvent
     def closeEvent(self, e):
-        if xdg_current_desktop == "sysmaint-session":
+        if xdg_current_desktop == "sysmaint-session" and not is_qubes_os():
             e.ignore()
             shutdown_window = ShutdownWindow()
             shutdown_window.exec()
@@ -328,7 +333,7 @@ class MainWindow(QMainWindow):
 
     @staticmethod
     def check_system_status():
-        subprocess.Popen(["/usr/bin/systemcheck"])
+        subprocess.Popen(["/usr/bin/systemcheck", "--gui"])
 
     @staticmethod
     def open_terminal():
@@ -368,10 +373,12 @@ def main():
             and not "remove-sysmaint" in kernel_cmdline
         ):
             window.ui.installationGroupBox.setVisible(False)
+        if is_qubes_os():
+            window.ui.rebootButton.setVisible(False)
 
     window.show()
 
-    if xdg_current_desktop == "sysmaint-session":
+    if xdg_current_desktop == "sysmaint-session" and not is_qubes_os():
         bgrd_list = []
         for screen in app.screens():
             bgrd = BackgroundScreen()
