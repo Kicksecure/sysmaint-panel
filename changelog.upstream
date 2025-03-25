@@ -1,3 +1,22 @@
+commit 92fc806fee61065a1963fccb4f2ee5d105b59af0
+Merge: 4222a00 1457566
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Mar 25 08:59:33 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/qubes-sysmaint'
+
+commit 1457566e0195d3634585c044da93c696baa49167
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Mar 20 21:37:57 2025 -0500
+
+    Make compatible with Qubes OS
+
+commit 4222a00999866d205c84b7949a9305a39228c6b1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Mar 18 10:57:01 2025 +0000
+
+    bumped changelog version
+
 commit 7e3a5fc7943ff012bb18c3cc7fc7dc65a159dc5f
 Merge: 5c257e3 c9f5443
 Author: Patrick Schleizer <adrelanos@whonix.org>
