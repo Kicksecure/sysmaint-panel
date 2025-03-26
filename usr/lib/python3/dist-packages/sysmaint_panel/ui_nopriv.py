@@ -36,8 +36,8 @@ class Ui_NoPrivDialog(object):
     def retranslateUi(self, NoPrivDialog):
         _translate = QtCore.QCoreApplication.translate
         NoPrivDialog.setWindowTitle(_translate("NoPrivDialog", "Insufficient Privileges"))
-        self.label.setText(_translate("NoPrivDialog", "<html><head/><body><p>This system only allows the sysmaint account to perform<br>\n"
-"system maintenance. Please reboot and select<br>\n"
+        self.label.setText(_translate("NoPrivDialog", "<html><head/><body><p>This system is currently configured to only allow the\n"
+"\'sysmaint\' account to perform<br> system maintenance. Please reboot and select<br>\n"
 "\'PERSISTENT mode SYSMAINT\' at the boot menu.</p>\n"
 "<p>See <a href=\"https://www.kicksecure.com/wiki/sysmaint\">https://www.kicksecure.com/wiki/Sysmaint</a> for more<br>\n"
 "information.</p></body></html>"))
