@@ -9,6 +9,8 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
+dpkg -l | grep pyqt5-dev-tools
+
 project_base_dir="$(dirname "$(readlink -f "${0}")")";
 
 for ui_file in "${project_base_dir}"/ui/*; do
