@@ -1,3 +1,39 @@
+commit 4ccee1acd47fe6bac2972eee5a9d2ea50dcff35c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 04:56:44 2025 -0400
+
+    description
+
+commit 65f2ffd5a5b3070a63e923059b014f8559dd8239
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 04:33:56 2025 -0400
+
+    fix homepage link
+
+commit 4f430101360d986cadfa581d6bd0aa567bc05171
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 04:32:58 2025 -0400
+
+    remove usability-misc as dependency since pwchange has been moved to helper-scripts
+
+commit b710d3425a1d9825d3d4e15f0a4c14e83eef90bb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 04:32:24 2025 -0400
+
+    add dependency check
+
+commit 10d6f3ae78f8a721a479dc7d1fb09f4db601ef68
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 04:30:29 2025 -0400
+
+    output
+
+commit 35415c5a4d0d237e21e441a981c682e02901f0e8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Mar 25 13:32:49 2025 +0000
+
+    bumped changelog version
+
 commit 92fc806fee61065a1963fccb4f2ee5d105b59af0
 Merge: 4222a00 1457566
 Author: Patrick Schleizer <adrelanos@whonix.org>
