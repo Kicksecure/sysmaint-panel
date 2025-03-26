@@ -10,7 +10,7 @@ import grp
 from pathlib import Path
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
-from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QProcess
+from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QTimer
 
 from sysmaint_panel.ui_mainwindow import Ui_MainWindow
 from sysmaint_panel.ui_reboot import Ui_RebootDialog
@@ -36,6 +36,32 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 def is_qubes_os():
     return Path("/usr/share/qubes/marker-vm").exists()
+
+def timeout_lock(button):
+    button_text_parts = button.text().split(" ")
+    button_text_end_number = button_text_parts[
+        len(button_text_parts) - 1
+    ].strip("()")
+
+    try:
+        button_unlock_time = int(button_text_end_number)
+    except Exception:
+        button_text_parts.append("(5)")
+        button.setText(" ".join(button_text_parts))
+        button.setEnabled(False)
+        QTimer.singleShot(1000, lambda: timeout_lock(button))
+        return
+
+    button_text_parts.pop()
+    button_unlock_time -= 1
+    if button_unlock_time == 0:
+        button.setText(" ".join(button_text_parts))
+        button.setEnabled(True)
+        return
+
+    button_text_parts.append(f"({button_unlock_time})")
+    button.setText(" ".join(button_text_parts))
+    QTimer.singleShot(1000, lambda: timeout_lock(button))
 
 
 class NoPrivDialog(QDialog):
@@ -233,17 +259,16 @@ class MainWindow(QMainWindow):
 
         return super(MainWindow, self).event(e)
 
-    @staticmethod
-    def install_system():
+    def install_system(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
                 "/usr/bin/install-host",
             ]
         )
+        timeout_lock(self.ui.installSystemButton)
 
-    @staticmethod
-    def check_for_updates():
+    def check_for_updates(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -252,18 +277,18 @@ class MainWindow(QMainWindow):
                 "update",
             ]
         )
+        timeout_lock(self.ui.checkForUpdatesButton)
 
-    @staticmethod
-    def install_updates():
+    def install_updates(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
                 "/usr/bin/upgrade-nonroot",
             ]
         )
+        timeout_lock(self.ui.installUpdatesButton)
 
-    @staticmethod
-    def remove_unused_packages():
+    def remove_unused_packages(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -272,9 +297,9 @@ class MainWindow(QMainWindow):
                 "autoremove",
             ]
         )
+        timeout_lock(self.ui.removeUnusedPackagesButton)
 
-    @staticmethod
-    def purge_unused_packages():
+    def purge_unused_packages(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -283,14 +308,14 @@ class MainWindow(QMainWindow):
                 "autopurge",
             ]
         )
+        timeout_lock(self.ui.purgeUnusedPackagesButton)
 
     @staticmethod
     def install_software():
         install_software_window = InstallSoftwareDialog()
         install_software_window.exec()
 
-    @staticmethod
-    def manage_passwords():
+    def manage_passwords(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -298,9 +323,9 @@ class MainWindow(QMainWindow):
                 "/usr/sbin/pwchange",
             ]
         )
+        timeout_lock(self.ui.managePasswordsButton)
 
-    @staticmethod
-    def create_user():
+    def create_user(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -308,9 +333,9 @@ class MainWindow(QMainWindow):
                 "/usr/libexec/sysmaint-panel/create-user",
             ]
         )
+        timeout_lock(self.ui.createUserButton)
 
-    @staticmethod
-    def remove_user():
+    def remove_user(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -318,9 +343,9 @@ class MainWindow(QMainWindow):
                 "/usr/sbin/deluser",
             ]
         )
+        timeout_lock(self.ui.removeUserButton)
 
-    @staticmethod
-    def manage_autologin():
+    def manage_autologin(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -328,10 +353,11 @@ class MainWindow(QMainWindow):
                 "/usr/sbin/autologinchange",
             ]
         )
+        timeout_lock(self.ui.manageAutologinButton)
 
-    @staticmethod
-    def check_system_status():
+    def check_system_status(self):
         subprocess.Popen(["/usr/bin/systemcheck", "--gui"])
+        timeout_lock(self.ui.checkSystemStatusButton)
 
     @staticmethod
     def open_terminal():
