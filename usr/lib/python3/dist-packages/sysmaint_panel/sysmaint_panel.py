@@ -258,9 +258,7 @@ class MainWindow(QMainWindow):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
-                "/usr/bin/sudo",
-                "/usr/bin/apt",
-                "full-upgrade",
+                "/usr/bin/upgrade-nonroot",
             ]
         )
 
