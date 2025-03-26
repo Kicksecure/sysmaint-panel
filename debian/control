@@ -6,7 +6,7 @@ Section: admin
 Priority: optional
 Maintainer: Patrick Schleizer <adrelanos@kicksecure.com>
 Build-Depends: debhelper (>= 13), debhelper-compat (= 13), python3
-Homepage: https://www.kicksecure.com/wiki/Sys_Maint_Panel
+Homepage: https://www.kicksecure.com/wiki/System_Maintenance_Panel
 Vcs-Browser: https://github.com/Kicksecure/sysmaint-panel
 Vcs-Git: https://github.com/Kicksecure/sysmaint-panel.git
 Standards-Version: 4.6.2
