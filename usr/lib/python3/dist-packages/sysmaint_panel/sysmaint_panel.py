@@ -18,6 +18,7 @@ from sysmaint_panel.ui_shutdown import Ui_ShutdownDialog
 from sysmaint_panel.ui_installsoftware import Ui_InstallSoftwareDialog
 from sysmaint_panel.ui_background import Ui_BackgroundScreen
 from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
+from sysmaint_panel.ui_wronguser import Ui_WrongUserDialog
 from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 
 # from ui_mainwindow import Ui_MainWindow
@@ -26,6 +27,7 @@ from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 # from ui_installsoftware import Ui_InstallSoftwareDialog
 # from ui_background import Ui_BackgroundScreen
 # from ui_nopriv import Ui_NoPrivDialog
+# from ui_wronguser import Ui_WrongUserDialog
 # from ui_uninstall import Ui_UninstallDialog
 
 # Honor sigterm
@@ -68,6 +70,16 @@ class NoPrivDialog(QDialog):
     def __init__(self):
         super(NoPrivDialog, self).__init__()
         self.ui = Ui_NoPrivDialog()
+        self.ui.setupUi(self)
+        self.resize(self.minimumWidth(), self.minimumHeight())
+
+        self.ui.okButton.clicked.connect(self.done)
+
+
+class WrongUserDialog(QDialog):
+    def __init__(self):
+        super(WrongUserDialog, self).__init__()
+        self.ui = Ui_WrongUserDialog()
         self.ui.setupUi(self)
         self.resize(self.minimumWidth(), self.minimumHeight())
 
@@ -384,8 +396,12 @@ def main():
     sudo_owning_group = grp.getgrgid(sudo_owning_gid)[0]
     if sudo_owning_group == "sysmaint":
         if not os.access("/usr/bin/sudo", os.X_OK):
-            npwin = NoPrivDialog()
-            npwin.show()
+            if "boot-role=sysmaint" in kernel_cmdline:
+                wuwin = WrongUserDialog()
+                wuwin.show()
+            else:
+                npwin = NoPrivDialog()
+                npwin.show()
             sys.exit(app.exec_())
 
     if "remove-sysmaint" in kernel_cmdline:
