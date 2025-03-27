@@ -183,7 +183,7 @@ class UninstallDialog(QDialog):
 
     # Overrides QMainWindow.closeEvent
     def closeEvent(self, e):
-        if xdg_current_desktop == "sysmaint-session":
+        if xdg_current_desktop.startswith("sysmaint-session"):
             e.ignore()
             self.cancel()
         else:
@@ -243,6 +243,7 @@ class MainWindow(QMainWindow):
         self.ui.installSoftwareButton.clicked.connect(self.install_software)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
+        self.ui.lockScreenButton.clicked.connect(self.lock_screen)
         self.ui.rebootButton.clicked.connect(self.reboot)
         self.ui.shutDownButton.clicked.connect(self.shutdown)
 
@@ -250,7 +251,7 @@ class MainWindow(QMainWindow):
 
     # Overrides QMainWindow.closeEvent
     def closeEvent(self, e):
-        if xdg_current_desktop == "sysmaint-session" and not is_qubes_os():
+        if xdg_current_desktop.startswith("sysmaint-session") and not is_qubes_os():
             e.ignore()
             shutdown_window = ShutdownWindow()
             shutdown_window.exec()
@@ -264,7 +265,7 @@ class MainWindow(QMainWindow):
             e.type() == QEvent.WindowStateChange
             and (self.windowState() & Qt.WindowMinimized) == Qt.WindowMinimized
         ):
-            if xdg_current_desktop == "sysmaint-session":
+            if xdg_current_desktop.startswith("sysmaint-session"):
                 e.ignore()
                 self.setWindowState(e.oldState())
                 return True
@@ -376,6 +377,10 @@ class MainWindow(QMainWindow):
             ["/usr/libexec/helper-scripts/terminal-wrapper", default_shell]
         )
 
+    def lock_screen(self):
+        subprocess.Popen(["/usr/libexec/helper-scripts/lock-screen"])
+        timeout_lock(self.ui.lockScreenButton)
+
     @staticmethod
     def reboot():
         reboot_window = RebootWindow()
@@ -417,7 +422,7 @@ def main():
 
     window.show()
 
-    if xdg_current_desktop == "sysmaint-session" and not is_qubes_os():
+    if xdg_current_desktop.startswith("sysmaint-session") and not is_qubes_os():
         bgrd_list = []
         for screen in app.screens():
             bgrd = BackgroundScreen()
