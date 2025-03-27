@@ -1,3 +1,46 @@
+commit 171c56d91fe04184c3a8d90c6bef7289921940a4
+Merge: 784dd7d 6913d14
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Mar 27 03:42:49 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 6913d1451467ebc961236ca4e4c0cd4adcd00a8c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 26 23:42:20 2025 -0500
+
+    Add screenlock button
+
+commit 824e32f4b285018229739d82e108d69f53969806
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 26 23:16:03 2025 -0500
+
+    Use apt-get-update from security-misc
+
+commit b782aa512689242d2a8066a1d7a36bc0ce40fc9b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 26 17:25:13 2025 -0500
+
+    Fix warning message when attempting to launch sysmaint-panel from wrong user in sysmaint mode
+
+commit 7e39a7df817045ba3c4bc6f7a1f64e82bba71d92
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 26 16:44:11 2025 -0500
+
+    Prevent the user from double-clicking most features by adding a 5-second delay between allowed button clicks
+
+commit 7ae6a0dcee5e15794dfdb78e9f804d0bf9394095
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 26 15:41:10 2025 -0500
+
+    Use upgrade-nonroot for software updates, reintroduces usability-misc dependency
+
+commit 784dd7d4000a5344477212da4d3e67b95e1b3b1e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 09:17:43 2025 +0000
+
+    bumped changelog version
+
 commit 4ccee1acd47fe6bac2972eee5a9d2ea50dcff35c
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Mar 26 04:56:44 2025 -0400
