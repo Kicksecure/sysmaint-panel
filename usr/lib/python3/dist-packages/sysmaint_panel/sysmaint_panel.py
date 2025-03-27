@@ -285,8 +285,7 @@ class MainWindow(QMainWindow):
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
                 "/usr/bin/sudo",
-                "/usr/bin/apt",
-                "update",
+                "/usr/libexec/security-misc/apt-get-update",
             ]
         )
         timeout_lock(self.ui.checkForUpdatesButton)
