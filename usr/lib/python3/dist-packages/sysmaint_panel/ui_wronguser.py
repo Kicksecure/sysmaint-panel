@@ -4,13 +4,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_NoPrivDialog(object):
-    def setupUi(self, NoPrivDialog):
-        NoPrivDialog.setObjectName("NoPrivDialog")
-        NoPrivDialog.resize(412, 194)
-        self.verticalLayout = QtWidgets.QVBoxLayout(NoPrivDialog)
+class Ui_WrongUserDialog(object):
+    def setupUi(self, WrongUserDialog):
+        WrongUserDialog.setObjectName("WrongUserDialog")
+        WrongUserDialog.resize(412, 174)
+        self.verticalLayout = QtWidgets.QVBoxLayout(WrongUserDialog)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(NoPrivDialog)
+        self.label = QtWidgets.QLabel(WrongUserDialog)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -25,21 +25,20 @@ class Ui_NoPrivDialog(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.okButton = QtWidgets.QPushButton(NoPrivDialog)
+        self.okButton = QtWidgets.QPushButton(WrongUserDialog)
         self.okButton.setObjectName("okButton")
         self.horizontalLayout.addWidget(self.okButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.retranslateUi(NoPrivDialog)
-        QtCore.QMetaObject.connectSlotsByName(NoPrivDialog)
+        self.retranslateUi(WrongUserDialog)
+        QtCore.QMetaObject.connectSlotsByName(WrongUserDialog)
 
-    def retranslateUi(self, NoPrivDialog):
+    def retranslateUi(self, WrongUserDialog):
         _translate = QtCore.QCoreApplication.translate
-        NoPrivDialog.setWindowTitle(_translate("NoPrivDialog", "Insufficient Privileges"))
-        self.label.setText(_translate("NoPrivDialog", "<html><head/><body><p>This system is currently configured to only allow the<br>\n"
+        WrongUserDialog.setWindowTitle(_translate("WrongUserDialog", "Insufficient Privileges"))
+        self.label.setText(_translate("WrongUserDialog", "<html><head/><body><p>This system is currently configured to only allow the<br>\n"
 "\'sysmaint\' account to perform system maintenance.<br>\n"
-"Please reboot and select \'PERSISTENT mode SYSMAINT\'<br>\n"
-"at the boot menu.</p>\n"
+"Please log into the \'sysmaint\' user account.</p>\n"
 "<p>See <a href=\"https://www.kicksecure.com/wiki/sysmaint\">https://www.kicksecure.com/wiki/Sysmaint</a> for more<br>\n"
 "information.</p></body></html>"))
-        self.okButton.setText(_translate("NoPrivDialog", "OK"))
+        self.okButton.setText(_translate("WrongUserDialog", "OK"))

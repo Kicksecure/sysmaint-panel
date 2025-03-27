@@ -10,7 +10,7 @@ import grp
 from pathlib import Path
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
-from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QProcess
+from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QTimer
 
 from sysmaint_panel.ui_mainwindow import Ui_MainWindow
 from sysmaint_panel.ui_reboot import Ui_RebootDialog
@@ -18,6 +18,7 @@ from sysmaint_panel.ui_shutdown import Ui_ShutdownDialog
 from sysmaint_panel.ui_installsoftware import Ui_InstallSoftwareDialog
 from sysmaint_panel.ui_background import Ui_BackgroundScreen
 from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
+from sysmaint_panel.ui_wronguser import Ui_WrongUserDialog
 from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 
 # from ui_mainwindow import Ui_MainWindow
@@ -26,6 +27,7 @@ from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 # from ui_installsoftware import Ui_InstallSoftwareDialog
 # from ui_background import Ui_BackgroundScreen
 # from ui_nopriv import Ui_NoPrivDialog
+# from ui_wronguser import Ui_WrongUserDialog
 # from ui_uninstall import Ui_UninstallDialog
 
 # Honor sigterm
@@ -37,11 +39,47 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 def is_qubes_os():
     return Path("/usr/share/qubes/marker-vm").exists()
 
+def timeout_lock(button):
+    button_text_parts = button.text().split(" ")
+    button_text_end_number = button_text_parts[
+        len(button_text_parts) - 1
+    ].strip("()")
+
+    try:
+        button_unlock_time = int(button_text_end_number)
+    except Exception:
+        button_text_parts.append("(5)")
+        button.setText(" ".join(button_text_parts))
+        button.setEnabled(False)
+        QTimer.singleShot(1000, lambda: timeout_lock(button))
+        return
+
+    button_text_parts.pop()
+    button_unlock_time -= 1
+    if button_unlock_time == 0:
+        button.setText(" ".join(button_text_parts))
+        button.setEnabled(True)
+        return
+
+    button_text_parts.append(f"({button_unlock_time})")
+    button.setText(" ".join(button_text_parts))
+    QTimer.singleShot(1000, lambda: timeout_lock(button))
+
 
 class NoPrivDialog(QDialog):
     def __init__(self):
         super(NoPrivDialog, self).__init__()
         self.ui = Ui_NoPrivDialog()
+        self.ui.setupUi(self)
+        self.resize(self.minimumWidth(), self.minimumHeight())
+
+        self.ui.okButton.clicked.connect(self.done)
+
+
+class WrongUserDialog(QDialog):
+    def __init__(self):
+        super(WrongUserDialog, self).__init__()
+        self.ui = Ui_WrongUserDialog()
         self.ui.setupUi(self)
         self.resize(self.minimumWidth(), self.minimumHeight())
 
@@ -145,7 +183,7 @@ class UninstallDialog(QDialog):
 
     # Overrides QMainWindow.closeEvent
     def closeEvent(self, e):
-        if xdg_current_desktop == "sysmaint-session":
+        if xdg_current_desktop.startswith("sysmaint-session"):
             e.ignore()
             self.cancel()
         else:
@@ -205,6 +243,7 @@ class MainWindow(QMainWindow):
         self.ui.installSoftwareButton.clicked.connect(self.install_software)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
+        self.ui.lockScreenButton.clicked.connect(self.lock_screen)
         self.ui.rebootButton.clicked.connect(self.reboot)
         self.ui.shutDownButton.clicked.connect(self.shutdown)
 
@@ -212,7 +251,7 @@ class MainWindow(QMainWindow):
 
     # Overrides QMainWindow.closeEvent
     def closeEvent(self, e):
-        if xdg_current_desktop == "sysmaint-session" and not is_qubes_os():
+        if xdg_current_desktop.startswith("sysmaint-session") and not is_qubes_os():
             e.ignore()
             shutdown_window = ShutdownWindow()
             shutdown_window.exec()
@@ -226,46 +265,42 @@ class MainWindow(QMainWindow):
             e.type() == QEvent.WindowStateChange
             and (self.windowState() & Qt.WindowMinimized) == Qt.WindowMinimized
         ):
-            if xdg_current_desktop == "sysmaint-session":
+            if xdg_current_desktop.startswith("sysmaint-session"):
                 e.ignore()
                 self.setWindowState(e.oldState())
                 return True
 
         return super(MainWindow, self).event(e)
 
-    @staticmethod
-    def install_system():
+    def install_system(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
                 "/usr/bin/install-host",
             ]
         )
+        timeout_lock(self.ui.installSystemButton)
 
-    @staticmethod
-    def check_for_updates():
+    def check_for_updates(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
                 "/usr/bin/sudo",
-                "/usr/bin/apt",
-                "update",
+                "/usr/libexec/security-misc/apt-get-update",
             ]
         )
+        timeout_lock(self.ui.checkForUpdatesButton)
 
-    @staticmethod
-    def install_updates():
+    def install_updates(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
-                "/usr/bin/sudo",
-                "/usr/bin/apt",
-                "full-upgrade",
+                "/usr/bin/upgrade-nonroot",
             ]
         )
+        timeout_lock(self.ui.installUpdatesButton)
 
-    @staticmethod
-    def remove_unused_packages():
+    def remove_unused_packages(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -274,9 +309,9 @@ class MainWindow(QMainWindow):
                 "autoremove",
             ]
         )
+        timeout_lock(self.ui.removeUnusedPackagesButton)
 
-    @staticmethod
-    def purge_unused_packages():
+    def purge_unused_packages(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -285,14 +320,14 @@ class MainWindow(QMainWindow):
                 "autopurge",
             ]
         )
+        timeout_lock(self.ui.purgeUnusedPackagesButton)
 
     @staticmethod
     def install_software():
         install_software_window = InstallSoftwareDialog()
         install_software_window.exec()
 
-    @staticmethod
-    def manage_passwords():
+    def manage_passwords(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -300,9 +335,9 @@ class MainWindow(QMainWindow):
                 "/usr/sbin/pwchange",
             ]
         )
+        timeout_lock(self.ui.managePasswordsButton)
 
-    @staticmethod
-    def create_user():
+    def create_user(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -310,9 +345,9 @@ class MainWindow(QMainWindow):
                 "/usr/libexec/sysmaint-panel/create-user",
             ]
         )
+        timeout_lock(self.ui.createUserButton)
 
-    @staticmethod
-    def remove_user():
+    def remove_user(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -320,9 +355,9 @@ class MainWindow(QMainWindow):
                 "/usr/sbin/deluser",
             ]
         )
+        timeout_lock(self.ui.removeUserButton)
 
-    @staticmethod
-    def manage_autologin():
+    def manage_autologin(self):
         subprocess.Popen(
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
@@ -330,16 +365,21 @@ class MainWindow(QMainWindow):
                 "/usr/sbin/autologinchange",
             ]
         )
+        timeout_lock(self.ui.manageAutologinButton)
 
-    @staticmethod
-    def check_system_status():
+    def check_system_status(self):
         subprocess.Popen(["/usr/bin/systemcheck", "--gui"])
+        timeout_lock(self.ui.checkSystemStatusButton)
 
     @staticmethod
     def open_terminal():
         subprocess.Popen(
             ["/usr/libexec/helper-scripts/terminal-wrapper", default_shell]
         )
+
+    def lock_screen(self):
+        subprocess.Popen(["/usr/libexec/helper-scripts/lock-screen"])
+        timeout_lock(self.ui.lockScreenButton)
 
     @staticmethod
     def reboot():
@@ -360,8 +400,12 @@ def main():
     sudo_owning_group = grp.getgrgid(sudo_owning_gid)[0]
     if sudo_owning_group == "sysmaint":
         if not os.access("/usr/bin/sudo", os.X_OK):
-            npwin = NoPrivDialog()
-            npwin.show()
+            if "boot-role=sysmaint" in kernel_cmdline:
+                wuwin = WrongUserDialog()
+                wuwin.show()
+            else:
+                npwin = NoPrivDialog()
+                npwin.show()
             sys.exit(app.exec_())
 
     if "remove-sysmaint" in kernel_cmdline:
@@ -378,7 +422,7 @@ def main():
 
     window.show()
 
-    if xdg_current_desktop == "sysmaint-session" and not is_qubes_os():
+    if xdg_current_desktop.startswith("sysmaint-session") and not is_qubes_os():
         bgrd_list = []
         for screen in app.screens():
             bgrd = BackgroundScreen()

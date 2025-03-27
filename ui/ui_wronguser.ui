@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NoPrivDialog</class>
- <widget class="QDialog" name="NoPrivDialog">
+ <class>WrongUserDialog</class>
+ <widget class="QDialog" name="WrongUserDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>412</width>
-    <height>194</height>
+    <height>174</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,8 +31,7 @@
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This system is currently configured to only allow the&lt;br&gt;
 'sysmaint' account to perform system maintenance.&lt;br&gt;
-Please reboot and select 'PERSISTENT mode SYSMAINT'&lt;br&gt;
-at the boot menu.&lt;/p&gt;
+Please log into the 'sysmaint' user account.&lt;/p&gt;
 &lt;p&gt;See &lt;a href=&quot;https://www.kicksecure.com/wiki/sysmaint&quot;&gt;https://www.kicksecure.com/wiki/Sysmaint&lt;/a&gt; for more&lt;br&gt;
 information.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
