@@ -15,7 +15,8 @@ from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QTimer
 from sysmaint_panel.ui_mainwindow import Ui_MainWindow
 from sysmaint_panel.ui_reboot import Ui_RebootDialog
 from sysmaint_panel.ui_shutdown import Ui_ShutdownDialog
-from sysmaint_panel.ui_installsoftware import Ui_InstallSoftwareDialog
+from sysmaint_panel.ui_managesoftware import Ui_ManageSoftwareDialog
+from sysmaint_panel.ui_managesoftwarehelp import Ui_ManageSoftwareHelpDialog
 from sysmaint_panel.ui_background import Ui_BackgroundScreen
 from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
 from sysmaint_panel.ui_wronguser import Ui_WrongUserDialog
@@ -24,7 +25,8 @@ from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 # from ui_mainwindow import Ui_MainWindow
 # from ui_reboot import Ui_RebootDialog
 # from ui_shutdown import Ui_ShutdownDialog
-# from ui_installsoftware import Ui_InstallSoftwareDialog
+# from ui_managesoftware import Ui_ManageSoftwareDialog
+# from ui_managesoftwarehelp import Ui_ManageSoftwareHelpDialog
 # from ui_background import Ui_BackgroundScreen
 # from ui_nopriv import Ui_NoPrivDialog
 # from ui_wronguser import Ui_WrongUserDialog
@@ -93,39 +95,94 @@ class BackgroundScreen(QDialog):
         self.ui.setupUi(self)
 
 
-class InstallSoftwareDialog(QDialog):
+class ManageSoftwareHelpDialog(QDialog):
     def __init__(self):
-        super(InstallSoftwareDialog, self).__init__()
-        self.ui = Ui_InstallSoftwareDialog()
+        super(ManageSoftwareHelpDialog, self).__init__()
+        self.ui = Ui_ManageSoftwareHelpDialog()
         self.ui.setupUi(self)
         self.resize(self.minimumWidth(), self.minimumHeight())
 
-        self.ui.searchButton.clicked.connect(self.search_for_package)
-        self.ui.installButton.clicked.connect(self.install_package)
+        self.ui.okButton.clicked.connect(self.done)
+
+
+class ManageSoftwareDialog(QDialog):
+    def __init__(self):
+        super(ManageSoftwareDialog, self).__init__()
+        self.ui = Ui_ManageSoftwareDialog()
+        self.ui.setupUi(self)
+        self.resize(self.minimumWidth(), self.minimumHeight())
+
+        self.ui.runButton.clicked.connect(self.run_action)
         self.ui.cancelButton.clicked.connect(self.cancel)
 
-    def search_for_package(self):
-        subprocess.Popen(
-            [
-                "/usr/libexec/helper-scripts/terminal-wrapper",
-                "/usr/bin/apt-cache",
-                "search",
-                self.ui.packageLineEdit.text(),
-            ]
-        )
-        print(1)
-
-    def install_package(self):
-        subprocess.Popen(
-            [
-                "/usr/libexec/helper-scripts/terminal-wrapper",
-                "/usr/bin/sudo",
-                "/usr/bin/apt",
-                "install",
-                self.ui.packageLineEdit.text(),
-            ]
-        )
-        self.done(0)
+    def run_action(self):
+        match self.ui.actionComboBox.currentText():
+            case "Search":
+                subprocess.Popen(
+                    [
+                        "/usr/libexec/helper-scripts/terminal-wrapper",
+                        "/usr/bin/apt-cache",
+                        "search",
+                        self.ui.packageLineEdit.text(),
+                    ]
+                )
+            case "Install":
+                subprocess.Popen(
+                    [
+                        "/usr/libexec/helper-scripts/terminal-wrapper",
+                        "/usr/bin/sudo",
+                        "/usr/bin/apt",
+                        "install",
+                        self.ui.packageLineEdit.text(),
+                    ]
+                )
+                self.done(0)
+            case "Reinstall":
+                subprocess.Popen(
+                    [
+                        "/usr/libexec/helper-scripts/terminal-wrapper",
+                        "/usr/bin/sudo",
+                        "/usr/bin/apt-get-reset",
+                        self.ui.packageLineEdit.text(),
+                    ]
+                )
+                self.done(0)
+            case "Remove":
+                subprocess.Popen(
+                    [
+                        "/usr/libexec/helper-scripts/terminal-wrapper",
+                        "/usr/bin/sudo",
+                        "/usr/bin/apt",
+                        "remove",
+                        self.ui.packageLineEdit.text(),
+                    ]
+                )
+                self.done(0)
+            case "Purge":
+                subprocess.Popen(
+                    [
+                        "/usr/libexec/helper-scripts/terminal-wrapper",
+                        "/usr/bin/sudo",
+                        "/usr/bin/apt",
+                        "purge",
+                        self.ui.packageLineEdit.text(),
+                    ]
+                )
+                self.done(0)
+            case "Override":
+                subprocess.Popen(
+                    [
+                        "/usr/libexec/helper-scripts/terminal-wrapper",
+                        "/usr/bin/sudo",
+                        "/usr/bin/dummy-dependency",
+                        "--remove",
+                        self.ui.packageLineEdit.text(),
+                    ]
+                )
+                self.done(0)
+            case "Help":
+                help_window = ManageSoftwareHelpDialog()
+                help_window.exec()
 
     def cancel(self):
         self.done(0)
@@ -240,7 +297,7 @@ class MainWindow(QMainWindow):
         )
         self.ui.createUserButton.clicked.connect(self.create_user)
         self.ui.removeUserButton.clicked.connect(self.remove_user)
-        self.ui.installSoftwareButton.clicked.connect(self.install_software)
+        self.ui.manageSoftwareButton.clicked.connect(self.manage_software)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
         self.ui.lockScreenButton.clicked.connect(self.lock_screen)
@@ -323,9 +380,9 @@ class MainWindow(QMainWindow):
         timeout_lock(self.ui.purgeUnusedPackagesButton)
 
     @staticmethod
-    def install_software():
-        install_software_window = InstallSoftwareDialog()
-        install_software_window.exec()
+    def manage_software():
+        manage_software_window = ManageSoftwareDialog()
+        manage_software_window.exec()
 
     def manage_passwords(self):
         subprocess.Popen(
