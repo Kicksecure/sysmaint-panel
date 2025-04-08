@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>InstallSoftwareDialog</class>
- <widget class="QDialog" name="InstallSoftwareDialog">
+ <class>ManageSoftwareDialog</class>
+ <widget class="QDialog" name="ManageSoftwareDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>331</width>
+    <width>354</width>
     <height>128</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Install Software</string>
+   <string>Manage Software</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -53,16 +53,55 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="searchButton">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Search</string>
+        <string>Action:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="installButton">
+      <widget class="QComboBox" name="actionComboBox">
+       <item>
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Install</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Reinstall</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Remove</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Purge</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Override</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Help</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="runButton">
        <property name="text">
-        <string>Install</string>
+        <string>Run</string>
        </property>
       </widget>
      </item>

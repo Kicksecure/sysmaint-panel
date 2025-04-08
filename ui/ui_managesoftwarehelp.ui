@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ManageSoftwareHelpDialog</class>
+ <widget class="QDialog" name="ManageSoftwareHelpDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>473</width>
+    <height>404</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Help - Manage Software</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>&lt;html&gt;
+&lt;head/&gt;
+&lt;body&gt;
+&lt;p&gt;The following software management actions are available:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Search: Looks through all enabled software repositories for&lt;br/&gt;
+a software package.&lt;/li&gt;
+&lt;li&gt;Install: Downloads and installs a software package.&lt;/li&gt;
+&lt;li&gt;Reinstall: Downloads and installs a software package, even&lt;br/&gt;
+if it is already installed.&lt;/li&gt;
+&lt;li&gt;Remove: Uninstalls a software package and anything&lt;br/&gt;
+depending on it. Leaves the package's configuration files on&lt;br/&gt;
+the system.&lt;/li&gt;
+&lt;li&gt;Purge: Uninstalls a software package and anything&lt;br/&gt;
+depending on it. Wipes the package's configuration files.&lt;/li&gt;
+&lt;li&gt;Override: Uninstalls a software package without removing&lt;br/&gt;
+other software that depends on it. Removes the package's&lt;br/&gt;
+configuration files. Do not use this unless you know what&lt;br/&gt;
+you are doing.&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</string>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
