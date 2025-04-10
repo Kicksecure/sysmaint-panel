@@ -1,3 +1,41 @@
+commit 1198bc62646cf7e3401f054c5fef6936bb315f9c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 10 05:46:25 2025 -0400
+
+    change boot mode labels to make these easier to find in the wiki
+
+commit 0a29f26393bfa20c07af0d9778b90e66f93f115a
+Merge: fd6a9f5 37065e0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 10 05:37:35 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit fd6a9f580a807f0551e7390b1ecb5e5c9f093ca7
+Merge: 88c37fd 7dc75c3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 10 05:35:36 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/rename-boot-modes'
+
+commit 37065e0be2095f2e7dd5f6a461fefb701f0c2254
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Apr 9 22:49:28 2025 -0500
+
+    Add data persistence info
+
+commit 7dc75c38906098a3a631253ca65f91c9baeb6f45
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Apr 9 20:59:03 2025 -0500
+
+    Mass-change "PERSISTENCE mode USERNAME" to "PERSISTENCE Mode - USERNAME Session"
+
+commit 88c37fde7b55d92c2c25e7162dcd9ba5f9043e99
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 9 15:16:43 2025 +0000
+
+    bumped changelog version
+
 commit 56af986fd8ad0dffc158d1c581a6a8820adfcede
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Apr 9 09:46:17 2025 -0400
