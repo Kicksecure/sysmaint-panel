@@ -11,6 +11,7 @@ from pathlib import Path
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QTimer
+from PyQt5.QtGui import QPixmap
 
 from sysmaint_panel.ui_mainwindow import Ui_MainWindow
 from sysmaint_panel.ui_reboot import Ui_RebootDialog
@@ -281,6 +282,8 @@ class MainWindow(QMainWindow):
 
         self.ui.installSystemButton.clicked.connect(self.install_system)
 
+        self.detect_live_mode()
+
         self.ui.checkForUpdatesButton.clicked.connect(self.check_for_updates)
         self.ui.installUpdatesButton.clicked.connect(self.install_updates)
         self.ui.removeUnusedPackagesButton.clicked.connect(
@@ -328,6 +331,41 @@ class MainWindow(QMainWindow):
                 return True
 
         return super(MainWindow, self).event(e)
+
+    def detect_live_mode(self):
+        base_icon_dir = "/usr/share/icons/gnome-colors-common/32x32"
+        live_mode_str = subprocess.run(
+            [
+                "/usr/bin/bash",
+                "-c",
+                "eval \"$(/usr/libexec/helper-scripts/live-mode.sh)\"; "
+                + "echo "
+                + "\"$live_status_detected_live_mode_environment_machine\""
+            ],
+            capture_output = True,
+            text = True,
+        ).stdout.strip()
+        match live_mode_str:
+            case "iso-live":
+                self.ui.bootModeIconLabel.setPixmap(
+                    QPixmap(base_icon_dir + "/devices/media-optical.png")
+                )
+                self.ui.bootModeNameLabel.setText("ISO Live")
+            case "grub-live":
+                self.ui.bootModeIconLabel.setPixmap(
+                    QPixmap(base_icon_dir + "/status/user-online.png")
+                )
+                self.ui.bootModeNameLabel.setText("Live")
+            case "false":
+                self.ui.bootModeIconLabel.setPixmap(
+                    QPixmap(base_icon_dir + "/status/dialog-information.png")
+                )
+                self.ui.bootModeNameLabel.setText("Persistent")
+            case _:
+                self.ui.bootModeIconLabel.setPixmap(
+                    QPixmap(base_icon_dir + "/status/dialog-error.png")
+                )
+                self.ui.bootModeNameLabel.setText("Error getting boot mode")
 
     def install_system(self):
         subprocess.Popen(
