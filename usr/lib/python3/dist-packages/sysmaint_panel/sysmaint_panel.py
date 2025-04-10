@@ -350,17 +350,17 @@ class MainWindow(QMainWindow):
                 self.ui.bootModeIconLabel.setPixmap(
                     QPixmap(base_icon_dir + "/devices/media-optical.png")
                 )
-                self.ui.bootModeNameLabel.setText("ISO Live")
+                self.ui.bootModeNameLabel.setText("ISO Live Mode")
             case "grub-live":
                 self.ui.bootModeIconLabel.setPixmap(
                     QPixmap(base_icon_dir + "/status/user-online.png")
                 )
-                self.ui.bootModeNameLabel.setText("Live")
+                self.ui.bootModeNameLabel.setText("grub-live Mode")
             case "false":
                 self.ui.bootModeIconLabel.setPixmap(
                     QPixmap(base_icon_dir + "/status/dialog-information.png")
                 )
-                self.ui.bootModeNameLabel.setText("Persistent")
+                self.ui.bootModeNameLabel.setText("Persistent Mode")
             case _:
                 self.ui.bootModeIconLabel.setPixmap(
                     QPixmap(base_icon_dir + "/status/dialog-error.png")
