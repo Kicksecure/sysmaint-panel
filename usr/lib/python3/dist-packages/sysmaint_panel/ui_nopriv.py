@@ -38,8 +38,8 @@ class Ui_NoPrivDialog(object):
         NoPrivDialog.setWindowTitle(_translate("NoPrivDialog", "Insufficient Privileges"))
         self.label.setText(_translate("NoPrivDialog", "<html><head/><body><p>This system is currently configured to only allow the<br>\n"
 "\'sysmaint\' account to perform system maintenance.<br>\n"
-"Please reboot and select \'PERSISTENT mode SYSMAINT\'<br>\n"
-"at the boot menu.</p>\n"
+"Please reboot and select \'PERSISTENT Mode - SYSMAINT<br>\n"
+"Session\' at the boot menu.</p>\n"
 "<p>See <a href=\"https://www.kicksecure.com/wiki/sysmaint\">https://www.kicksecure.com/wiki/Sysmaint</a> for more<br>\n"
 "information.</p></body></html>"))
         self.okButton.setText(_translate("NoPrivDialog", "OK"))
