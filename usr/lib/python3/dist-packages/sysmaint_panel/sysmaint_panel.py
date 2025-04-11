@@ -22,6 +22,7 @@ from sysmaint_panel.ui_background import Ui_BackgroundScreen
 from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
 from sysmaint_panel.ui_wronguser import Ui_WrongUserDialog
 from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
+from sysmaint_panel.ui_managepasswords import Ui_ManagePasswordsDialog
 
 # from ui_mainwindow import Ui_MainWindow
 # from ui_reboot import Ui_RebootDialog
@@ -32,6 +33,7 @@ from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 # from ui_nopriv import Ui_NoPrivDialog
 # from ui_wronguser import Ui_WrongUserDialog
 # from ui_uninstall import Ui_UninstallDialog
+# from ui_managepasswords import Ui_ManagePasswordsDialog
 
 # Honor sigterm
 import signal
@@ -186,6 +188,39 @@ class ManageSoftwareDialog(QDialog):
                 help_window.exec()
 
     def cancel(self):
+        self.done(0)
+
+
+class ManagePasswordsDialog(QDialog):
+    def __init__(self):
+        super(ManagePasswordsDialog, self).__init__()
+        self.ui = Ui_ManagePasswordsDialog()
+        self.ui.setupUi(self)
+        self.resize(self.minimumWidth(), self.minimumHeight())
+
+        self.ui.userPasswordButton.clicked.connect(self.user_password_change)
+        self.ui.bootloaderPasswordButton.clicked.connect(
+            self.bootloader_password_change
+        )
+
+    def user_password_change(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/pwchange",
+            ]
+        )
+        self.done(0)
+
+    def bootloader_password_change(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/grub-pwchange",
+            ]
+        )
         self.done(0)
 
 
@@ -423,14 +458,8 @@ class MainWindow(QMainWindow):
         manage_software_window.exec()
 
     def manage_passwords(self):
-        subprocess.Popen(
-            [
-                "/usr/libexec/helper-scripts/terminal-wrapper",
-                "/usr/bin/sudo",
-                "/usr/sbin/pwchange",
-            ]
-        )
-        timeout_lock(self.ui.managePasswordsButton)
+        manage_passwords_window = ManagePasswordsDialog()
+        manage_passwords_window.exec()
 
     def create_user(self):
         subprocess.Popen(
