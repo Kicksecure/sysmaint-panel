@@ -44,6 +44,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 def is_qubes_os():
     return Path("/usr/share/qubes/marker-vm").exists()
 
+
 def timeout_lock(button):
     button_text_parts = button.text().split(" ")
     button_text_end_number = button_text_parts[
@@ -202,6 +203,9 @@ class ManagePasswordsDialog(QDialog):
         self.ui.bootloaderPasswordButton.clicked.connect(
             self.bootloader_password_change
         )
+        self.ui.diskPassphraseButton.clicked.connect(
+            self.disk_passphrase_change
+        )
 
     def user_password_change(self):
         subprocess.Popen(
@@ -219,6 +223,16 @@ class ManagePasswordsDialog(QDialog):
                 "/usr/libexec/helper-scripts/terminal-wrapper",
                 "/usr/bin/sudo",
                 "/usr/sbin/grub-pwchange",
+            ]
+        )
+        self.done(0)
+
+    def disk_passphrase_change(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/crypt-pwchange",
             ]
         )
         self.done(0)
@@ -346,7 +360,10 @@ class MainWindow(QMainWindow):
 
     # Overrides QMainWindow.closeEvent
     def closeEvent(self, e):
-        if xdg_current_desktop.startswith("sysmaint-session") and not is_qubes_os():
+        if (
+            xdg_current_desktop.startswith("sysmaint-session")
+            and not is_qubes_os()
+        ):
             e.ignore()
             shutdown_window = ShutdownWindow()
             shutdown_window.exec()
@@ -373,12 +390,12 @@ class MainWindow(QMainWindow):
             [
                 "/usr/bin/bash",
                 "-c",
-                "eval \"$(/usr/libexec/helper-scripts/live-mode.sh)\"; "
+                'eval "$(/usr/libexec/helper-scripts/live-mode.sh)"; '
                 + "echo "
-                + "\"$live_status_detected_live_mode_environment_machine\""
+                + '"$live_status_detected_live_mode_environment_machine"',
             ],
-            capture_output = True,
-            text = True,
+            capture_output=True,
+            text=True,
         ).stdout.strip()
         match live_mode_str:
             case "iso-live":
@@ -457,7 +474,8 @@ class MainWindow(QMainWindow):
         manage_software_window = ManageSoftwareDialog()
         manage_software_window.exec()
 
-    def manage_passwords(self):
+    @staticmethod
+    def manage_passwords():
         manage_passwords_window = ManagePasswordsDialog()
         manage_passwords_window.exec()
 
