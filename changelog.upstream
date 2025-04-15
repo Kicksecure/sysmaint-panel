@@ -1,3 +1,28 @@
+commit a1fd31919bf56e21973e8a2cf9f6eb090caf3b1f
+Merge: 84190af 4cae9d0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 15 16:35:39 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 4cae9d07ec439da362ebd616f8f8367c35fa32da
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Apr 11 14:04:17 2025 -0500
+
+    Add disk passphrase management button, fix formatting
+
+commit 0271a053bfc3d1457ff11fc8889d1f088b8068c5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Apr 10 21:51:22 2025 -0500
+
+    Add bootloader password changer button
+
+commit 84190afbdccf57f0fc4562fe5720cabc2589d3cf
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 10 11:39:01 2025 +0000
+
+    bumped changelog version
+
 commit 1198bc62646cf7e3401f054c5fef6936bb315f9c
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Apr 10 05:46:25 2025 -0400
