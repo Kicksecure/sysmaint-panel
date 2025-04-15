@@ -22,6 +22,7 @@ from sysmaint_panel.ui_background import Ui_BackgroundScreen
 from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
 from sysmaint_panel.ui_wronguser import Ui_WrongUserDialog
 from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
+from sysmaint_panel.ui_managepasswords import Ui_ManagePasswordsDialog
 
 # from ui_mainwindow import Ui_MainWindow
 # from ui_reboot import Ui_RebootDialog
@@ -32,6 +33,7 @@ from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 # from ui_nopriv import Ui_NoPrivDialog
 # from ui_wronguser import Ui_WrongUserDialog
 # from ui_uninstall import Ui_UninstallDialog
+# from ui_managepasswords import Ui_ManagePasswordsDialog
 
 # Honor sigterm
 import signal
@@ -41,6 +43,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 def is_qubes_os():
     return Path("/usr/share/qubes/marker-vm").exists()
+
 
 def timeout_lock(button):
     button_text_parts = button.text().split(" ")
@@ -189,6 +192,52 @@ class ManageSoftwareDialog(QDialog):
         self.done(0)
 
 
+class ManagePasswordsDialog(QDialog):
+    def __init__(self):
+        super(ManagePasswordsDialog, self).__init__()
+        self.ui = Ui_ManagePasswordsDialog()
+        self.ui.setupUi(self)
+        self.resize(self.minimumWidth(), self.minimumHeight())
+
+        self.ui.userPasswordButton.clicked.connect(self.user_password_change)
+        self.ui.bootloaderPasswordButton.clicked.connect(
+            self.bootloader_password_change
+        )
+        self.ui.diskPassphraseButton.clicked.connect(
+            self.disk_passphrase_change
+        )
+
+    def user_password_change(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/pwchange",
+            ]
+        )
+        self.done(0)
+
+    def bootloader_password_change(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/grub-pwchange",
+            ]
+        )
+        self.done(0)
+
+    def disk_passphrase_change(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/crypt-pwchange",
+            ]
+        )
+        self.done(0)
+
+
 class RebootWindow(QDialog):
     def __init__(self):
         super(RebootWindow, self).__init__()
@@ -311,7 +360,10 @@ class MainWindow(QMainWindow):
 
     # Overrides QMainWindow.closeEvent
     def closeEvent(self, e):
-        if xdg_current_desktop.startswith("sysmaint-session") and not is_qubes_os():
+        if (
+            xdg_current_desktop.startswith("sysmaint-session")
+            and not is_qubes_os()
+        ):
             e.ignore()
             shutdown_window = ShutdownWindow()
             shutdown_window.exec()
@@ -338,12 +390,12 @@ class MainWindow(QMainWindow):
             [
                 "/usr/bin/bash",
                 "-c",
-                "eval \"$(/usr/libexec/helper-scripts/live-mode.sh)\"; "
+                'eval "$(/usr/libexec/helper-scripts/live-mode.sh)"; '
                 + "echo "
-                + "\"$live_status_detected_live_mode_environment_machine\""
+                + '"$live_status_detected_live_mode_environment_machine"',
             ],
-            capture_output = True,
-            text = True,
+            capture_output=True,
+            text=True,
         ).stdout.strip()
         match live_mode_str:
             case "iso-live":
@@ -422,15 +474,10 @@ class MainWindow(QMainWindow):
         manage_software_window = ManageSoftwareDialog()
         manage_software_window.exec()
 
-    def manage_passwords(self):
-        subprocess.Popen(
-            [
-                "/usr/libexec/helper-scripts/terminal-wrapper",
-                "/usr/bin/sudo",
-                "/usr/sbin/pwchange",
-            ]
-        )
-        timeout_lock(self.ui.managePasswordsButton)
+    @staticmethod
+    def manage_passwords():
+        manage_passwords_window = ManagePasswordsDialog()
+        manage_passwords_window.exec()
 
     def create_user(self):
         subprocess.Popen(
