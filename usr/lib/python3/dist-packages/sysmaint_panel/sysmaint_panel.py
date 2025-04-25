@@ -349,6 +349,9 @@ class MainWindow(QMainWindow):
         )
         self.ui.createUserButton.clicked.connect(self.create_user)
         self.ui.removeUserButton.clicked.connect(self.remove_user)
+        self.ui.runRepositoryWizardButton.clicked.connect(
+            self.run_repository_wizard
+        )
         self.ui.manageSoftwareButton.clicked.connect(self.manage_software)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
@@ -498,6 +501,14 @@ class MainWindow(QMainWindow):
             ]
         )
         timeout_lock(self.ui.removeUserButton)
+
+    def run_repository_wizard(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/repository-dist/repository-dist-wizard"
+            ]
+        )
+        timeout_lock(self.ui.runRepositoryWizardButton)
 
     def manage_autologin(self):
         subprocess.Popen(
