@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>448</width>
-    <height>176</height>
+    <width>624</width>
+    <height>182</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>&lt;p&gt;You are about to uninstall user-sysmaint-split. This will restore&lt;br&gt;normal sudo access for account '&lt;code&gt;user&lt;/code&gt;'.&lt;/p&gt;&lt;p&gt;To confirm you really want to do this, type &quot;&lt;b&gt;yes&lt;/b&gt;&quot; and click OK.</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You are about to uninstall the package user-sysmaint-split and thereby enable unrestricted admin mode.&lt;br/&gt;This will restore normal sudo access for account '&lt;span style=&quot; font-family:'monospace';&quot;&gt;user&lt;/span&gt;'.&lt;/p&gt;&lt;p&gt;To confirm you really want to do this, type &amp;quot;&lt;span style=&quot; font-weight:600;&quot;&gt;yes&lt;/span&gt;&amp;quot; and click OK.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="wordWrap">
       <bool>false</bool>

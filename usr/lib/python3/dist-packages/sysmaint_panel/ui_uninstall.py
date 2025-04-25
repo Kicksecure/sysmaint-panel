@@ -7,7 +7,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_UninstallDialog(object):
     def setupUi(self, UninstallDialog):
         UninstallDialog.setObjectName("UninstallDialog")
-        UninstallDialog.resize(448, 176)
+        UninstallDialog.resize(624, 182)
         self.verticalLayout = QtWidgets.QVBoxLayout(UninstallDialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(UninstallDialog)
@@ -35,6 +35,6 @@ class Ui_UninstallDialog(object):
     def retranslateUi(self, UninstallDialog):
         _translate = QtCore.QCoreApplication.translate
         UninstallDialog.setWindowTitle(_translate("UninstallDialog", "Dialog"))
-        self.label.setText(_translate("UninstallDialog", "<p>You are about to uninstall user-sysmaint-split. This will restore<br>normal sudo access for account \'<code>user</code>\'.</p><p>To confirm you really want to do this, type \"<b>yes</b>\" and click OK."))
+        self.label.setText(_translate("UninstallDialog", "<html><head/><body><p>You are about to uninstall the package user-sysmaint-split and thereby enable unrestricted admin mode.<br/>This will restore normal sudo access for account \'<span style=\" font-family:\'monospace\';\">user</span>\'.</p><p>To confirm you really want to do this, type &quot;<span style=\" font-weight:600;\">yes</span>&quot; and click OK.</p></body></html>"))
         self.okButton.setText(_translate("UninstallDialog", "OK"))
         self.cancelButton.setText(_translate("UninstallDialog", "Cancel"))
