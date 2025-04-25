@@ -49,7 +49,7 @@ class Ui_ManageSoftwareDialog(object):
     def retranslateUi(self, ManageSoftwareDialog):
         _translate = QtCore.QCoreApplication.translate
         ManageSoftwareDialog.setWindowTitle(_translate("ManageSoftwareDialog", "Manage Software"))
-        self.label.setText(_translate("ManageSoftwareDialog", "Enter a package name to install or search for:"))
+        self.label.setText(_translate("ManageSoftwareDialog", "Enter a package name to search or modify:"))
         self.label_2.setText(_translate("ManageSoftwareDialog", "Action:"))
         self.actionComboBox.setItemText(0, _translate("ManageSoftwareDialog", "Search"))
         self.actionComboBox.setItemText(1, _translate("ManageSoftwareDialog", "Install"))
