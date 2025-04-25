@@ -1,3 +1,21 @@
+commit 429f26a8701a0f7d23aea0b2e34df5c9a8dd8a3e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 05:50:38 2025 -0400
+
+    improve wording of remove user-sysmaint-split
+
+commit 580e18c36abf1555649e666b6a112e76ccf752d6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 05:35:42 2025 -0400
+
+    output
+
+commit d8c6161c985bed66b0899f6c64f18bff4c4df237
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 08:19:56 2025 +0000
+
+    bumped changelog version
+
 commit 5aed2ea7412c32ded5bfe65c67abf3db6c9c7cb2
 Merge: d883226 b376aea
 Author: Patrick Schleizer <adrelanos@whonix.org>
