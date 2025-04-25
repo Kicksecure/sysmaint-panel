@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>&lt;p&gt;You are about to uninstall user-sysmaint-split. This will restore&lt;br&gt;normal sudo access for user '&lt;code&gt;user&lt;/code&gt;'.&lt;/p&gt;&lt;p&gt;To confirm you really want to do this, type &quot;&lt;b&gt;yes&lt;/b&gt;&quot; and click OK.</string>
+      <string>&lt;p&gt;You are about to uninstall user-sysmaint-split. This will restore&lt;br&gt;normal sudo access for account '&lt;code&gt;user&lt;/code&gt;'.&lt;/p&gt;&lt;p&gt;To confirm you really want to do this, type &quot;&lt;b&gt;yes&lt;/b&gt;&quot; and click OK.</string>
      </property>
      <property name="wordWrap">
       <bool>false</bool>

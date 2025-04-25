@@ -35,6 +35,6 @@ class Ui_UninstallDialog(object):
     def retranslateUi(self, UninstallDialog):
         _translate = QtCore.QCoreApplication.translate
         UninstallDialog.setWindowTitle(_translate("UninstallDialog", "Dialog"))
-        self.label.setText(_translate("UninstallDialog", "<p>You are about to uninstall user-sysmaint-split. This will restore<br>normal sudo access for user \'<code>user</code>\'.</p><p>To confirm you really want to do this, type \"<b>yes</b>\" and click OK."))
+        self.label.setText(_translate("UninstallDialog", "<p>You are about to uninstall user-sysmaint-split. This will restore<br>normal sudo access for account \'<code>user</code>\'.</p><p>To confirm you really want to do this, type \"<b>yes</b>\" and click OK."))
         self.okButton.setText(_translate("UninstallDialog", "OK"))
         self.cancelButton.setText(_translate("UninstallDialog", "Cancel"))
