@@ -10,6 +10,7 @@ set -o errtrace
 set -o pipefail
 
 dpkg -l | grep pyqt5-dev-tools
+true "INFO: package qtchooser contains 'designer' program"
 
 project_base_dir="$(dirname "$(readlink -f "${0}")")";
 
