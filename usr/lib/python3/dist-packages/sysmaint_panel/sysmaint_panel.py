@@ -45,6 +45,18 @@ def is_qubes_os():
     return Path("/usr/share/qubes/marker-vm").exists()
 
 
+def is_kicksecure():
+    return Path("/usr/share/kicksecure/marker").exists()
+
+
+def is_whonix_gateway():
+    return Path("/usr/share/anon-gw-base-files/gateway").exists()
+
+
+def is_whonix_workstation():
+    return Path("/usr/share/anon-ws-base-files/workstation").exists()
+
+
 def timeout_lock(button):
     button_text_parts = button.text().split(" ")
     button_text_end_number = button_text_parts[
@@ -97,6 +109,15 @@ class BackgroundScreen(QDialog):
         super(BackgroundScreen, self).__init__()
         self.ui = Ui_BackgroundScreen()
         self.ui.setupUi(self)
+        if is_whonix_gateway():
+            self.setStyleSheet("background-color: #77767b;")
+        elif is_whonix_workstation():
+            self.setStyleSheet("background-color: #4098bf;")
+        elif is_kicksecure():
+            self.setStyleSheet(
+                "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, "
+                "y2:1, stop:0 #3b187b, stop:1 #a9def2);"
+            )
 
 
 class ManageSoftwareHelpDialog(QDialog):

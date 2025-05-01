@@ -35,7 +35,7 @@ class Ui_NoPrivDialog(object):
 
     def retranslateUi(self, NoPrivDialog):
         _translate = QtCore.QCoreApplication.translate
-        NoPrivDialog.setWindowTitle(_translate("NoPrivDialog", "Insufficient Privileges"))
+        NoPrivDialog.setWindowTitle(_translate("NoPrivDialog", "Sysmaint Panel - Insufficient Privileges"))
         self.label.setText(_translate("NoPrivDialog", "<html><head/><body><p>This system is currently configured to only allow the<br>\n"
 "\'sysmaint\' account to perform system maintenance.<br>\n"
 "Please reboot and select \'PERSISTENT Mode - SYSMAINT<br>\n"
