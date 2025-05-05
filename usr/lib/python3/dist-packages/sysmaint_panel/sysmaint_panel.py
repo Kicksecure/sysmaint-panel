@@ -432,6 +432,13 @@ class MainWindow(QMainWindow):
                     QPixmap(base_icon_dir + "/status/user-online.png")
                 )
                 self.ui.bootModeNameLabel.setText("grub-live Mode")
+            case "grub-live-semi-persistent":
+                self.ui.bootModeIconLabel.setPixmap(
+                    QPixmap(base_icon_dir + "/status/dialog-error.png")
+                )
+                self.ui.bootModeNameLabel.setText(
+                    "grub-live Semi-persistent Mode"
+                )
             case "false":
                 self.ui.bootModeIconLabel.setPixmap(
                     QPixmap(base_icon_dir + "/status/dialog-information.png")
