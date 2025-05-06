@@ -226,13 +226,20 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0" colspan="2">
+         <item row="4" column="0">
           <widget class="QPushButton" name="manageSoftwareButton">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Allows you to search for and install software through the apt package manager.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string>Manage Software</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QPushButton" name="searchLogsButton">
+           <property name="text">
+            <string>Search Logs</string>
            </property>
           </widget>
          </item>
