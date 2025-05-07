@@ -35,7 +35,7 @@ class Ui_WrongUserDialog(object):
 
     def retranslateUi(self, WrongUserDialog):
         _translate = QtCore.QCoreApplication.translate
-        WrongUserDialog.setWindowTitle(_translate("WrongUserDialog", "Insufficient Privileges"))
+        WrongUserDialog.setWindowTitle(_translate("WrongUserDialog", "Sysmaint Panel - Insufficient Privileges"))
         self.label.setText(_translate("WrongUserDialog", "<html><head/><body><p>This system is currently configured to only allow the<br>\n"
 "\'sysmaint\' account to perform system maintenance.<br>\n"
 "Please log into the \'sysmaint\' user account.</p>\n"

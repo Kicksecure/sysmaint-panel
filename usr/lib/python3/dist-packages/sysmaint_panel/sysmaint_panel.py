@@ -8,6 +8,7 @@ import subprocess
 import os
 import grp
 from pathlib import Path
+import tempfile
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QTimer
@@ -23,6 +24,7 @@ from sysmaint_panel.ui_nopriv import Ui_NoPrivDialog
 from sysmaint_panel.ui_wronguser import Ui_WrongUserDialog
 from sysmaint_panel.ui_uninstall import Ui_UninstallDialog
 from sysmaint_panel.ui_managepasswords import Ui_ManagePasswordsDialog
+from sysmaint_panel.ui_searchlogs import Ui_SearchLogsDialog
 
 # from ui_mainwindow import Ui_MainWindow
 # from ui_reboot import Ui_RebootDialog
@@ -34,6 +36,7 @@ from sysmaint_panel.ui_managepasswords import Ui_ManagePasswordsDialog
 # from ui_wronguser import Ui_WrongUserDialog
 # from ui_uninstall import Ui_UninstallDialog
 # from ui_managepasswords import Ui_ManagePasswordsDialog
+# from ui_searchlogs import Ui_SearchLogsDialog
 
 # Honor sigterm
 import signal
@@ -43,6 +46,18 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 def is_qubes_os():
     return Path("/usr/share/qubes/marker-vm").exists()
+
+
+def is_kicksecure():
+    return Path("/usr/share/kicksecure/marker").exists()
+
+
+def is_whonix_gateway():
+    return Path("/usr/share/anon-gw-base-files/gateway").exists()
+
+
+def is_whonix_workstation():
+    return Path("/usr/share/anon-ws-base-files/workstation").exists()
 
 
 def timeout_lock(button):
@@ -97,6 +112,15 @@ class BackgroundScreen(QDialog):
         super(BackgroundScreen, self).__init__()
         self.ui = Ui_BackgroundScreen()
         self.ui.setupUi(self)
+        if is_whonix_gateway():
+            self.setStyleSheet("background-color: #77767b;")
+        elif is_whonix_workstation():
+            self.setStyleSheet("background-color: #4098bf;")
+        elif is_kicksecure():
+            self.setStyleSheet(
+                "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, "
+                "y2:1, stop:0 #3b187b, stop:1 #a9def2);"
+            )
 
 
 class ManageSoftwareHelpDialog(QDialog):
@@ -322,6 +346,56 @@ class UninstallDialog(QDialog):
         subprocess.run(["/usr/sbin/reboot"])
 
 
+class SearchLogsDialog(QDialog):
+    def __init__(self):
+        super(SearchLogsDialog, self).__init__()
+        self.ui = Ui_SearchLogsDialog()
+        self.ui.setupUi(self)
+        self.resize(self.minimumWidth(), self.minimumHeight())
+        self.ui.searchButton.clicked.connect(self.search_logs)
+        self.ui.cancelButton.clicked.connect(self.cancel)
+
+    def search_logs(self):
+        # We use pkexec here since we have to collect logs internally before
+        # showing the terminal window, but also need to prompt for
+        # authorization.
+        journal_logs = subprocess.run(
+            [
+                "/usr/bin/pkexec",
+                "/usr/bin/journalctl",
+                "--no-pager",
+                "--boot",
+            ],
+            capture_output=True,
+            text=False,
+        ).stdout
+        filtered_logs = subprocess.run(
+            [
+                "/usr/bin/grep",
+                "--extended-regexp",
+                "--",
+                self.ui.searchTermLineEdit.text(),
+            ],
+            capture_output=True,
+            text=False,
+            input=journal_logs,
+        ).stdout
+        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        temp_file.write(filtered_logs)
+        temp_file.close()
+        subprocess.run(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/less",
+                temp_file.name,
+            ]
+        )
+        os.unlink(temp_file.name)
+
+    def cancel(self):
+        self.done(0)
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -353,6 +427,7 @@ class MainWindow(QMainWindow):
             self.run_repository_wizard
         )
         self.ui.manageSoftwareButton.clicked.connect(self.manage_software)
+        self.ui.searchLogsButton.clicked.connect(self.search_logs)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
         self.ui.lockScreenButton.clicked.connect(self.lock_screen)
@@ -411,6 +486,13 @@ class MainWindow(QMainWindow):
                     QPixmap(base_icon_dir + "/status/user-online.png")
                 )
                 self.ui.bootModeNameLabel.setText("grub-live Mode")
+            case "grub-live-semi-persistent":
+                self.ui.bootModeIconLabel.setPixmap(
+                    QPixmap(base_icon_dir + "/status/dialog-error.png")
+                )
+                self.ui.bootModeNameLabel.setText(
+                    "grub-live Semi-persistent Mode"
+                )
             case "false":
                 self.ui.bootModeIconLabel.setPixmap(
                     QPixmap(base_icon_dir + "/status/dialog-information.png")
@@ -477,6 +559,10 @@ class MainWindow(QMainWindow):
         manage_software_window = ManageSoftwareDialog()
         manage_software_window.exec()
 
+    def search_logs(self):
+        search_logs_window = SearchLogsDialog()
+        search_logs_window.exec()
+
     @staticmethod
     def manage_passwords():
         manage_passwords_window = ManagePasswordsDialog()
@@ -504,9 +590,7 @@ class MainWindow(QMainWindow):
 
     def run_repository_wizard(self):
         subprocess.Popen(
-            [
-                "/usr/libexec/repository-dist/repository-dist-wizard"
-            ]
+            ["/usr/libexec/repository-dist/repository-dist-wizard"]
         )
         timeout_lock(self.ui.runRepositoryWizardButton)
 

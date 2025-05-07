@@ -14,7 +14,7 @@
    <string>Background Window</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #3b187b, stop:1 #a9def2);</string>
+   <string notr="true">background-color: #000;</string>
   </property>
  </widget>
  <resources/>
