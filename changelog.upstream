@@ -1,3 +1,34 @@
+commit 930c8760512d108ea02e2b182e6784dfa9535a95
+Merge: 43a674c 0bac2a5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 7 00:37:40 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 0bac2a51162cf0c8301d7667829f7fbd896febb4
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue May 6 00:43:42 2025 -0500
+
+    Add log search feature
+
+commit 5ccc4218a0dd89c3a04ad4305fc6f7e088c24036
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun May 4 22:56:00 2025 -0500
+
+    Add support for detecting a semi-persistent state
+
+commit 04db8e25c4ecfb6d93ce013e805fc86eec445c3f
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu May 1 17:11:10 2025 -0500
+
+    Fully apply wording changes, fix background color on Whonix VMs
+
+commit 43a674c0e88cb5e7a767481fa073f274388b7d3c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Apr 27 20:19:36 2025 +0000
+
+    bumped changelog version
+
 commit 0db52e583f91a0ef5ca6d3b58310b589cc552998
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Apr 27 05:02:29 2025 -0400
