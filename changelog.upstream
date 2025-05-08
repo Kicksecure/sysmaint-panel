@@ -1,3 +1,28 @@
+commit ffda1b8abdd342d6b02a2a7644bb6d6cfd7ed8a1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu May 8 03:06:35 2025 -0400
+
+    chmod +x
+
+commit fb4dc954125997d444e97eb00a50ea8755aab559
+Merge: 58f24ce 82c9aa8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu May 8 03:05:16 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 82c9aa8ffb65f49215645abe9968cec02daebba8
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed May 7 18:45:56 2025 -0500
+
+    Add network status info and network configuration button
+
+commit 58f24ce715af84d95366a88a99814d9e7bd5fb30
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 7 06:42:28 2025 +0000
+
+    bumped changelog version
+
 commit 39943d5e133773729b0546bfd2159290c558eda3
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed May 7 02:36:54 2025 -0400
