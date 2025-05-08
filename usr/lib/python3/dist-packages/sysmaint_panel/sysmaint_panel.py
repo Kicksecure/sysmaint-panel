@@ -11,7 +11,7 @@ from pathlib import Path
 import tempfile
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
-from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QTimer
+from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QTimer, QProcess
 from PyQt5.QtGui import QPixmap
 
 from sysmaint_panel.ui_mainwindow import Ui_MainWindow
@@ -407,6 +407,10 @@ class MainWindow(QMainWindow):
 
         self.detect_live_mode()
 
+        self.conn_status_mon = QProcess()
+        self.update_network_conn_status()
+        self.monitor_network_conn_status()
+
         self.ui.checkForUpdatesButton.clicked.connect(self.check_for_updates)
         self.ui.installUpdatesButton.clicked.connect(self.install_updates)
         self.ui.removeUnusedPackagesButton.clicked.connect(
@@ -416,6 +420,7 @@ class MainWindow(QMainWindow):
             self.purge_unused_packages
         )
 
+        self.ui.networkConnButton.clicked.connect(self.network_conn)
         self.ui.managePasswordsButton.clicked.connect(self.manage_passwords)
         self.ui.manageAutologinButton.clicked.connect(self.manage_autologin)
         self.ui.checkSystemStatusButton.clicked.connect(
@@ -504,6 +509,50 @@ class MainWindow(QMainWindow):
                 )
                 self.ui.bootModeNameLabel.setText("Error getting boot mode")
 
+    def update_network_conn_status(self):
+        base_icon_dir = "/usr/share/icons/gnome-colors-common/scalable"
+        self.conn_status_mon.readAllStandardOutput()
+        self.conn_status_mon.readAllStandardError()
+        global_ip_addr_data = subprocess.run(
+            [
+                "/usr/bin/ip",
+                "-o",
+                "addr",
+                "show",
+                "scope",
+                "global",
+            ],
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        if global_ip_addr_data == "":
+            self.ui.networkConnIconLabel.setPixmap(
+                QPixmap(
+                    base_icon_dir + "/notifications/notification-network"
+                    "-disconnected.svg",
+                ).scaled(32, 32)
+            )
+            self.ui.networkConnNameLabel.setText("Disconnected")
+        else:
+            self.ui.networkConnIconLabel.setPixmap(
+                QPixmap(
+                    base_icon_dir + "/notifications/notification-network"
+                    "-ethernet-connected.svg",
+                ).scaled(32, 32)
+            )
+            self.ui.networkConnNameLabel.setText("Connected")
+
+    def monitor_network_conn_status(self):
+        self.conn_status_mon.setProgram("/usr/bin/ip")
+        self.conn_status_mon.setArguments(["monitor"])
+        self.conn_status_mon.readyReadStandardOutput.connect(
+            self.update_network_conn_status
+        )
+        self.conn_status_mon.readyReadStandardError.connect(
+            self.update_network_conn_status
+        )
+        self.conn_status_mon.start()
+
     def install_system(self):
         subprocess.Popen(
             [
@@ -559,9 +608,19 @@ class MainWindow(QMainWindow):
         manage_software_window = ManageSoftwareDialog()
         manage_software_window.exec()
 
-    def search_logs(self):
+    @staticmethod
+    def search_logs():
         search_logs_window = SearchLogsDialog()
         search_logs_window.exec()
+
+    def network_conn(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/nmtui",
+            ]
+        )
+        timeout_lock(self.ui.networkConnButton)
 
     @staticmethod
     def manage_passwords():
