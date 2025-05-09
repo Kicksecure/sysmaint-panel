@@ -1,3 +1,22 @@
+commit fee594ae5b361b528e86b790cfeeaf5d8f2ec525
+Merge: c8e76fd 49359e7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri May 9 07:38:54 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 49359e785b2b69343143f9603c793da79b260622
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu May 8 17:53:20 2025 -0500
+
+    Remove network status notifier, moving to a systray
+
+commit c8e76fd5a57bd4613368e64225064f8756e24bf3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu May 8 07:17:09 2025 +0000
+
+    bumped changelog version
+
 commit ffda1b8abdd342d6b02a2a7644bb6d6cfd7ed8a1
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu May 8 03:06:35 2025 -0400
