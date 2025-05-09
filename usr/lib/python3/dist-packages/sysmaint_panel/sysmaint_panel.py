@@ -407,10 +407,6 @@ class MainWindow(QMainWindow):
 
         self.detect_live_mode()
 
-        self.conn_status_mon = QProcess()
-        self.update_network_conn_status()
-        self.monitor_network_conn_status()
-
         self.ui.checkForUpdatesButton.clicked.connect(self.check_for_updates)
         self.ui.installUpdatesButton.clicked.connect(self.install_updates)
         self.ui.removeUnusedPackagesButton.clicked.connect(
@@ -508,50 +504,6 @@ class MainWindow(QMainWindow):
                     QPixmap(base_icon_dir + "/status/dialog-error.png")
                 )
                 self.ui.bootModeNameLabel.setText("Error getting boot mode")
-
-    def update_network_conn_status(self):
-        base_icon_dir = "/usr/share/icons/gnome-colors-common/scalable"
-        self.conn_status_mon.readAllStandardOutput()
-        self.conn_status_mon.readAllStandardError()
-        global_ip_addr_data = subprocess.run(
-            [
-                "/usr/bin/ip",
-                "-o",
-                "addr",
-                "show",
-                "scope",
-                "global",
-            ],
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
-        if global_ip_addr_data == "":
-            self.ui.networkConnIconLabel.setPixmap(
-                QPixmap(
-                    base_icon_dir + "/notifications/notification-network"
-                    "-disconnected.svg",
-                ).scaled(32, 32)
-            )
-            self.ui.networkConnNameLabel.setText("Disconnected")
-        else:
-            self.ui.networkConnIconLabel.setPixmap(
-                QPixmap(
-                    base_icon_dir + "/notifications/notification-network"
-                    "-ethernet-connected.svg",
-                ).scaled(32, 32)
-            )
-            self.ui.networkConnNameLabel.setText("Connected")
-
-    def monitor_network_conn_status(self):
-        self.conn_status_mon.setProgram("/usr/bin/ip")
-        self.conn_status_mon.setArguments(["monitor"])
-        self.conn_status_mon.readyReadStandardOutput.connect(
-            self.update_network_conn_status
-        )
-        self.conn_status_mon.readyReadStandardError.connect(
-            self.update_network_conn_status
-        )
-        self.conn_status_mon.start()
 
     def install_system(self):
         subprocess.Popen(
