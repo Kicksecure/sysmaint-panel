@@ -1,3 +1,22 @@
+commit 66c0ab8a875428226c35b0c3bfbe1e18011fab79
+Merge: f85a92c 6cbc7b7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jun 6 15:42:14 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/livecheck'
+
+commit 6cbc7b7dd1867f974cfbcc7b2e187148563b6b75
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Jun 3 01:00:02 2025 -0500
+
+    Remove obsolete live mode indicator (replaced by livecheck applet from desktop-config-dist)
+
+commit f85a92c9cb22bd91243c011a8fe287fc501e6c7d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri May 9 11:47:28 2025 +0000
+
+    bumped changelog version
+
 commit fee594ae5b361b528e86b790cfeeaf5d8f2ec525
 Merge: c8e76fd 49359e7
 Author: Patrick Schleizer <adrelanos@whonix.org>
