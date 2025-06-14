@@ -1,6 +1,9 @@
 # System Maintenance Panel #
 
-WARNING: Not yet stable.
+The System Maintenance Panel (sysmaint-panel) allows the user to perform
+several common system maintenance and administration tasks. It can be used to
+install, remove, and update software, create and remove user accounts, and
+enable or disable password protection and autologin for user accounts.
 
 Provides a minimal session that can be booted into for system maintenance
 tasks on Linux distributions.
