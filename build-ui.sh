@@ -15,11 +15,11 @@ true "INFO: package qtchooser contains 'designer' program"
 mode="${1:-build}"
 project_name="sysmaint_panel"
 
-project_base_dir="$(dirname "$(readlink -f "${0}")")";
+project_base_dir="$(dirname -- "$(readlink -f -- "${0}")")";
 
 if [ "${mode}" = 'build' ]; then
   for ui_file in "${project_base_dir}"/ui/*; do
-    ui_file_basename="$(basename "${ui_file}")"
+    ui_file_basename="$(basename -- "${ui_file}")"
     ui_py_file_basename="$(cut -d'.' -f1 <<< "${ui_file_basename}")_ui.py"
     pyuic5 "${ui_file}" | tee -- "${project_base_dir}/usr/lib/python3/dist-packages/${project_name}/${ui_py_file_basename}" > /dev/null
     sed -i '/^#/d' "${project_base_dir}/usr/lib/python3/dist-packages/${project_name}/${ui_py_file_basename}"
@@ -28,7 +28,7 @@ elif [ "${mode}" = 'clean' ]; then
   for ui_file in "${project_base_dir}/usr/lib/python3/dist-packages/${project_name}"/*_ui.py; do
     if [ -f "${ui_file}" ]; then
       printf '%s\n' "Removing file '${ui_file}'"
-      safe-rm "${ui_file}"
+      safe-rm -- "${ui_file}"
     fi
   done
 else
