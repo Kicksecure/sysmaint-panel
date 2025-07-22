@@ -1,3 +1,22 @@
+commit 43ddf419065e164394e90071774ca13e921a769c
+Merge: fb69793 5297df7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 22 03:18:09 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/default-browser'
+
+commit 5297df73fefc49735e5c62dc924985807c0cba3c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Jul 21 22:27:41 2025 -0500
+
+    Add "Install a Browser" button
+
+commit fb69793e7ec823c7004b0a81465f2ab563447f67
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jul 19 09:47:06 2025 +0000
+
+    bumped changelog version
+
 commit 2f6b759763ecceecd125d1a20aacfacb2e9a21fc
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Jul 18 01:57:22 2025 -0400
