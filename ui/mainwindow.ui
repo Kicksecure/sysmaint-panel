@@ -195,10 +195,17 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0" colspan="2">
+         <item row="0" column="1">
           <widget class="QPushButton" name="networkConnButton">
            <property name="text">
-            <string>Network and Internet Connections</string>
+            <string>Network Connections</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="browserInstallButton">
+           <property name="text">
+            <string>Install a Browser</string>
            </property>
           </widget>
          </item>

@@ -402,6 +402,7 @@ class MainWindow(QMainWindow):
             self.purge_unused_packages
         )
 
+        self.ui.browserInstallButton.clicked.connect(self.browser_install)
         self.ui.networkConnButton.clicked.connect(self.network_conn)
         self.ui.managePasswordsButton.clicked.connect(self.manage_passwords)
         self.ui.manageAutologinButton.clicked.connect(self.manage_autologin)
@@ -508,6 +509,10 @@ class MainWindow(QMainWindow):
     def search_logs():
         search_logs_window = SearchLogsDialog()
         search_logs_window.exec()
+
+    def browser_install(self):
+        subprocess.Popen(["/usr/bin/browser-choice"])
+        timeout_lock(self.ui.browserInstallButton)
 
     def network_conn(self):
         subprocess.Popen(
