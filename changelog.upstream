@@ -1,3 +1,22 @@
+commit d7dfc2344dcd3549d2620fc7e7c4d61680a703d5
+Merge: 31a6570 76366ba
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jul 26 04:59:48 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 76366bab51e3614e70739a539da79ba65a13e1b3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Jul 25 19:25:27 2025 -0500
+
+    Hide irrelevant buttons in Whonix, add Tor management utilities for Whonix-Gateway
+
+commit 31a657071f4ed1ff7f7fd6cdefff0d8e874b7fa4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 22 07:26:54 2025 +0000
+
+    bumped changelog version
+
 commit 43ddf419065e164394e90071774ca13e921a769c
 Merge: fb69793 5297df7
 Author: Patrick Schleizer <adrelanos@whonix.org>
