@@ -404,6 +404,12 @@ class MainWindow(QMainWindow):
 
         self.ui.browserInstallButton.clicked.connect(self.browser_install)
         self.ui.networkConnButton.clicked.connect(self.network_conn)
+
+        self.ui.anonConnectionWizardButton.clicked.connect(self.anon_connection_wizard)
+        self.ui.torControlPanelButton.clicked.connect(self.tor_control_panel)
+        self.ui.onionCircuitsButton.clicked.connect(self.onion_circuits)
+        self.ui.torStatusMonitorButton.clicked.connect(self.tor_status_monitor)
+
         self.ui.managePasswordsButton.clicked.connect(self.manage_passwords)
         self.ui.manageAutologinButton.clicked.connect(self.manage_autologin)
         self.ui.checkSystemStatusButton.clicked.connect(
@@ -523,6 +529,27 @@ class MainWindow(QMainWindow):
         )
         timeout_lock(self.ui.networkConnButton)
 
+    def anon_connection_wizard(self):
+        subprocess.Popen(["/usr/bin/anon-connection-wizard"])
+        timeout_lock(self.ui.anonConnectionWizardButton)
+
+    def tor_control_panel(self):
+        subprocess.Popen(["/usr/bin/tor-control-panel"])
+        timeout_lock(self.ui.torControlPanelButton)
+
+    def onion_circuits(self):
+        subprocess.Popen(["/usr/bin/onioncircuits"])
+        timeout_lock(self.ui.onionCircuitsButton)
+
+    def tor_status_monitor(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/nyx",
+            ]
+        )
+        timeout_lock(self.ui.torStatusMonitorButton)
+
     @staticmethod
     def manage_passwords():
         manage_passwords_window = ManagePasswordsDialog()
@@ -616,6 +643,14 @@ def main():
             window.ui.installationGroupBox.setVisible(False)
         if is_qubes_os():
             window.ui.rebootButton.setVisible(False)
+        if is_whonix_gateway() or is_whonix_workstation():
+            window.ui.browserInstallButton.setVisible(False)
+            window.ui.networkConnButton.setVisible(False)
+        if not is_whonix_gateway():
+            window.ui.anonConnectionWizardButton.setVisible(False)
+            window.ui.torControlPanelButton.setVisible(False)
+            window.ui.onionCircuitsButton.setVisible(False)
+            window.ui.torStatusMonitorButton.setVisible(False)
 
     window.show()
 
