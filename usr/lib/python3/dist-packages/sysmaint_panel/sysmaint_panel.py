@@ -75,6 +75,33 @@ def timeout_lock(button):
     QTimer.singleShot(1000, lambda: timeout_lock(button))
 
 
+def launch_swaybg():
+    if is_whonix_gateway():
+        subprocess.Popen(
+            [
+                "/usr/bin/swaybg",
+                "-c77767b",
+                "--mode=tile",
+            ]
+        )
+    elif is_whonix_workstation():
+        subprocess.Popen(
+            [
+                "/usr/bin/swaybg",
+                "-c4098bf",
+                "--mode=tile",
+            ]
+        )
+    elif is_kicksecure():
+        subprocess.Popen(
+            [
+                "/usr/bin/swaybg",
+                "--image=/usr/share/kicksecure/kicksecure-desktop-background.png",
+                "--mode=stretch",
+            ]
+        )
+
+
 class NoPrivDialog(QDialog):
     def __init__(self):
         super(NoPrivDialog, self).__init__()
@@ -654,18 +681,24 @@ def main():
 
     window.show()
 
-    if xdg_current_desktop.startswith("sysmaint-session") and not is_qubes_os():
-        bgrd_list = []
-        for screen in app.screens():
-            bgrd = BackgroundScreen()
-            bgrd.setGeometry(screen.geometry())
-            bgrd.setWindowFlags(
-                Qt.WindowStaysOnBottomHint | Qt.WindowDoesNotAcceptFocus
-            )
-            bgrd.showFullScreen()
-            # noinspection PyUnresolvedReferences
-            window.closed.connect(bgrd.close)
-            bgrd_list.append(bgrd)
+    if (
+        xdg_current_desktop.startswith("sysmaint-session")
+        and not is_qubes_os()
+    ):
+        if os.getenv("WAYLAND_DISPLAY", "") == "":
+            bgrd_list = []
+            for screen in app.screens():
+                bgrd = BackgroundScreen()
+                bgrd.setGeometry(screen.geometry())
+                bgrd.setWindowFlags(
+                    Qt.WindowStaysOnBottomHint | Qt.WindowDoesNotAcceptFocus
+                )
+                bgrd.showFullScreen()
+                # noinspection PyUnresolvedReferences
+                window.closed.connect(bgrd.close)
+                bgrd_list.append(bgrd)
+        else:
+            launch_swaybg()
 
     sys.exit(app.exec_())
 
