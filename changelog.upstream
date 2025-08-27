@@ -1,3 +1,46 @@
+commit 5b3d09319e47ce18b7451616290796ece9078530
+Merge: 67d5680 fd976db
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 20 09:49:47 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 67d5680ab94da3bd06332fc1bfddf1a9d17208af
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 20 06:57:30 2025 -0400
+
+    bumped Standards-Version
+
+commit 5a98cb86620c6f2c33acdca81e47a7c88549a972
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 20 06:25:36 2025 -0400
+
+    readme
+
+commit fd976dbf26471e5763e8a6c7be029a0037ec99f8
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Aug 10 16:12:34 2025 -0500
+
+    Remove dependency on usability-misc (necessary functionality moved to helper-scripts)
+
+commit de8841de283d1d4f3b80adc450cb076a1c8cf8c9
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Aug 10 15:24:37 2025 -0500
+
+    Move security-misc/apt-get-update* to helper-scripts
+
+commit e390f4693ca3bd0de491b1947d96296fedd07862
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Aug 5 22:58:08 2025 -0500
+
+    Port to Trixie.
+
+commit 5c9ce7ab01db039b3f5cb18a493cae07e473eda2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jul 26 09:07:14 2025 +0000
+
+    bumped changelog version
+
 commit d7dfc2344dcd3549d2620fc7e7c4d61680a703d5
 Merge: 31a6570 76366ba
 Author: Patrick Schleizer <adrelanos@whonix.org>
