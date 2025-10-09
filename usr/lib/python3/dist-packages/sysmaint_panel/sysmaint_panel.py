@@ -429,10 +429,14 @@ class MainWindow(QMainWindow):
             self.purge_unused_packages
         )
 
+        self.ui.lxqtConfigButton.clicked.connect(self.lxqt_config)
+
         self.ui.browserInstallButton.clicked.connect(self.browser_install)
         self.ui.networkConnButton.clicked.connect(self.network_conn)
 
-        self.ui.anonConnectionWizardButton.clicked.connect(self.anon_connection_wizard)
+        self.ui.anonConnectionWizardButton.clicked.connect(
+            self.anon_connection_wizard
+        )
         self.ui.torControlPanelButton.clicked.connect(self.tor_control_panel)
         self.ui.onionCircuitsButton.clicked.connect(self.onion_circuits)
         self.ui.torStatusMonitorButton.clicked.connect(self.tor_status_monitor)
@@ -454,6 +458,7 @@ class MainWindow(QMainWindow):
         self.ui.lockScreenButton.clicked.connect(self.lock_screen)
         self.ui.rebootButton.clicked.connect(self.reboot)
         self.ui.shutDownButton.clicked.connect(self.shutdown)
+        self.ui.toggleOskButton.clicked.connect(self.toggle_osk)
 
     closed = pyqtSignal()
 
@@ -532,6 +537,10 @@ class MainWindow(QMainWindow):
             ]
         )
         timeout_lock(self.ui.purgeUnusedPackagesButton)
+
+    def lxqt_config(self):
+        subprocess.Popen(["/usr/bin/lxqt-config"])
+        timeout_lock(self.ui.lxqtConfigButton)
 
     @staticmethod
     def manage_software():
@@ -642,6 +651,13 @@ class MainWindow(QMainWindow):
         shutdown_window = ShutdownWindow()
         shutdown_window.exec()
 
+    def toggle_osk(self):
+        if Path(f"/run/user/{os.getuid()}/dist-virtual-keyboard.pid").is_file():
+            subprocess.Popen(["/usr/bin/dist-virtual-keyboard", "--terminate"])
+        else:
+            subprocess.Popen(["/usr/bin/dist-virtual-keyboard"])
+        timeout_lock(self.ui.toggleOskButton)
+
 
 def main():
     app = QApplication(sys.argv)
@@ -678,13 +694,12 @@ def main():
             window.ui.torControlPanelButton.setVisible(False)
             window.ui.onionCircuitsButton.setVisible(False)
             window.ui.torStatusMonitorButton.setVisible(False)
+        if "boot-role=sysmaint" in kernel_cmdline:
+            window.ui.lxqtConfigButton.setVisible(False)
 
     window.show()
 
-    if (
-        xdg_current_desktop.startswith("sysmaint-session")
-        and not is_qubes_os()
-    ):
+    if xdg_current_desktop.startswith("sysmaint-session") and not is_qubes_os():
         if os.getenv("WAYLAND_DISPLAY", "") == "":
             bgrd_list = []
             for screen in app.screens():
