@@ -429,8 +429,6 @@ class MainWindow(QMainWindow):
             self.purge_unused_packages
         )
 
-        self.ui.lxqtConfigButton.clicked.connect(self.lxqt_config)
-
         self.ui.browserInstallButton.clicked.connect(self.browser_install)
         self.ui.networkConnButton.clicked.connect(self.network_conn)
 
@@ -453,6 +451,8 @@ class MainWindow(QMainWindow):
         )
         self.ui.manageSoftwareButton.clicked.connect(self.manage_software)
         self.ui.searchLogsButton.clicked.connect(self.search_logs)
+        self.ui.configureDisplaysButton.clicked.connect(self.configure_displays)
+        self.ui.lxqtConfigButton.clicked.connect(self.lxqt_config)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
         self.ui.lockScreenButton.clicked.connect(self.lock_screen)
@@ -551,6 +551,10 @@ class MainWindow(QMainWindow):
     def search_logs():
         search_logs_window = SearchLogsDialog()
         search_logs_window.exec()
+
+    def configure_displays(self):
+        subprocess.Popen(["/usr/bin/wdisplays"])
+        timeout_lock(self.ui.configureDisplaysButton)
 
     def browser_install(self):
         subprocess.Popen(["/usr/bin/browser-choice"])

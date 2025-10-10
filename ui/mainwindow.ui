@@ -121,60 +121,6 @@
          <string>System Administration</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="4" column="0">
-          <widget class="QPushButton" name="managePasswordsButton">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Changes the password for a user account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>Manage Passwords</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QPushButton" name="manageAutologinButton">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enables or disables autologin for a user account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>Manage GUI Autologin</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="1">
-          <widget class="QPushButton" name="removeUserButton">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deletes an existing user account. &lt;span style=&quot; font-weight:600;&quot;&gt;This cannot be undone!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>Remove User</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="torControlPanelButton">
-           <property name="text">
-            <string>Tor Control Panel</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="browserInstallButton">
-           <property name="text">
-            <string>Install a Browser</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <widget class="QPushButton" name="checkSystemStatusButton">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Runs the System Check utility.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>Check System Status</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
           <widget class="QPushButton" name="networkConnButton">
            <property name="text">
@@ -192,10 +138,20 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="1">
-          <widget class="QPushButton" name="runRepositoryWizardButton">
+         <item row="8" column="0">
+          <widget class="QPushButton" name="checkSystemStatusButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Runs the System Check utility.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
-            <string>Run Repository Wizard</string>
+            <string>Check System Status</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="torControlPanelButton">
+           <property name="text">
+            <string>Tor Control Panel</string>
            </property>
           </widget>
          </item>
@@ -209,10 +165,27 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="anonConnectionWizardButton">
+         <item row="3" column="0">
+          <widget class="QPushButton" name="onionCircuitsButton">
            <property name="text">
-            <string>Anon Connection Wizard</string>
+            <string>Onion Circuits</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="browserInstallButton">
+           <property name="text">
+            <string>Install a Browser</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QPushButton" name="managePasswordsButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Changes the password for a user account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Manage Passwords</string>
            </property>
           </widget>
          </item>
@@ -223,10 +196,20 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="onionCircuitsButton">
+         <item row="7" column="0">
+          <widget class="QPushButton" name="manageAutologinButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enables or disables autologin for a user account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
-            <string>Onion Circuits</string>
+            <string>Manage GUI Autologin</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="anonConnectionWizardButton">
+           <property name="text">
+            <string>Anon Connection Wizard</string>
            </property>
           </widget>
          </item>
@@ -237,10 +220,34 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0" colspan="2">
+         <item row="8" column="1">
+          <widget class="QPushButton" name="runRepositoryWizardButton">
+           <property name="text">
+            <string>Run Repository Wizard</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QPushButton" name="removeUserButton">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deletes an existing user account. &lt;span style=&quot; font-weight:600;&quot;&gt;This cannot be undone!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Remove User</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1">
           <widget class="QPushButton" name="lxqtConfigButton">
            <property name="text">
             <string>LXQt Configuration</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0">
+          <widget class="QPushButton" name="configureDisplaysButton">
+           <property name="text">
+            <string>Configure Displays</string>
            </property>
           </widget>
          </item>
