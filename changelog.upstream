@@ -1,3 +1,22 @@
+commit e8b911e645f57520a5f790ca9413abf6dd1df292
+Merge: d1967ec ba65147
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 10 03:50:34 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit ba65147e32b9f11c1b01a2e3c43d298a208a22e1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Oct 9 18:57:46 2025 -0500
+
+    Add on-screen keyboard and LXQt config buttons, reformat with Black
+
+commit d1967ecbd5115e70bf98a94d9663e25ec0c6750e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Sep 19 16:20:15 2025 +0000
+
+    bumped changelog version
+
 commit 607a0a78e7972ca438c493da2798406da274212d
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Sep 18 10:08:19 2025 -0400
