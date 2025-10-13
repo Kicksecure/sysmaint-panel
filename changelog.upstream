@@ -1,3 +1,22 @@
+commit 4cd27336cbcd04a36fdcd135c3a53ce77a141b7a
+Merge: 71a69a8 5287897
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 13 09:23:14 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 5287897e117c8b7fc560599dbe2e4be608f4df9b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Oct 10 14:30:01 2025 -0500
+
+    Add display configuration button
+
+commit 71a69a8f5578ff0e7ea645117cee64a94d5ec6d7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 10 08:06:54 2025 +0000
+
+    bumped changelog version
+
 commit e8b911e645f57520a5f790ca9413abf6dd1df292
 Merge: d1967ec ba65147
 Author: Patrick Schleizer <adrelanos@whonix.org>
