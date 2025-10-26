@@ -452,6 +452,7 @@ class MainWindow(QMainWindow):
         self.ui.manageSoftwareButton.clicked.connect(self.manage_software)
         self.ui.searchLogsButton.clicked.connect(self.search_logs)
         self.ui.configureDisplaysButton.clicked.connect(self.configure_displays)
+        self.ui.systemKeymapButton.clicked.connect(self.set_system_keymap)
         self.ui.lxqtConfigButton.clicked.connect(self.lxqt_config)
 
         self.ui.openTerminalButton.clicked.connect(self.open_terminal)
@@ -555,6 +556,17 @@ class MainWindow(QMainWindow):
     def configure_displays(self):
         subprocess.Popen(["/usr/bin/wdisplays"])
         timeout_lock(self.ui.configureDisplaysButton)
+
+    def set_system_keymap(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/bin/set-system-keymap",
+                "--interactive",
+            ]
+        )
+        timeout_lock(self.ui.systemKeymapButton)
 
     def browser_install(self):
         subprocess.Popen(["/usr/bin/browser-choice"])
