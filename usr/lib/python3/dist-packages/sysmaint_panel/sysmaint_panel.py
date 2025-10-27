@@ -702,6 +702,8 @@ def main():
             window.ui.installationGroupBox.setVisible(False)
         if is_qubes_os():
             window.ui.rebootButton.setVisible(False)
+            window.ui.systemKeymapButton.setVisible(False)
+            window.ui.toggleOskButton.setVisible(False)
         if is_whonix_gateway() or is_whonix_workstation():
             window.ui.browserInstallButton.setVisible(False)
             window.ui.networkConnButton.setVisible(False)
