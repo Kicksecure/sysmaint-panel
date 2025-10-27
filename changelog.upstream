@@ -1,3 +1,22 @@
+commit 1cbc25b789db2bd81340a454fc39bf8bc86b89f1
+Merge: ee95cb1 504ee30
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 03:03:58 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 504ee303d8a1daa72203b0329de2ed529982532e
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Oct 26 16:01:23 2025 -0500
+
+    Hide 'set system keymap' and 'toggle on-screen keyboard' buttons on Qubes OS
+
+commit ee95cb172ff894dee0af9144b66bedb98388fe23
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Oct 26 10:20:46 2025 +0000
+
+    bumped changelog version
+
 commit a8e115c7777925c4eb959ae86859e176108594fa
 Merge: 6387adb 19a54f4
 Author: Patrick Schleizer <adrelanos@whonix.org>
