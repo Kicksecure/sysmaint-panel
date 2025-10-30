@@ -1,3 +1,22 @@
+commit 5453658ad0b197cc04013274ed034028ea94e484
+Merge: 56bbe3d 8027359
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 30 01:43:03 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 8027359c0a6be7627ec61cdc1f46e1e71c873b4b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Oct 29 20:24:20 2025 -0500
+
+    Adjust to new lock-screen script location
+
+commit 56bbe3d4be7afe468d26b773e82d4334102f80d6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 08:42:12 2025 +0000
+
+    bumped changelog version
+
 commit 1cbc25b789db2bd81340a454fc39bf8bc86b89f1
 Merge: ee95cb1 504ee30
 Author: Patrick Schleizer <adrelanos@whonix.org>
