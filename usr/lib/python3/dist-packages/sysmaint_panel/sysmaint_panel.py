@@ -654,7 +654,7 @@ class MainWindow(QMainWindow):
         )
 
     def lock_screen(self):
-        subprocess.Popen(["/usr/libexec/helper-scripts/lock-screen"])
+        subprocess.Popen(["/usr/bin/lock-screen"])
         timeout_lock(self.ui.lockScreenButton)
 
     @staticmethod
