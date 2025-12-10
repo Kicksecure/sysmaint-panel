@@ -174,8 +174,7 @@ class ManageSoftwareDialog(QDialog):
                     [
                         "/usr/libexec/helper-scripts/terminal-wrapper",
                         "/usr/bin/sudo",
-                        "/usr/bin/apt",
-                        "install",
+                        "/usr/libexec/sysmaint-panel/install-helper",
                         self.ui.packageLineEdit.text(),
                     ]
                 )

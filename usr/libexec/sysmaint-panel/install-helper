@@ -1,0 +1,33 @@
+#!/bin/bash
+
+## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+export LC_ALL='C'
+
+pkg_name="${1:-}"
+if [ -z "${pkg_name}" ]; then
+  printf '%s\n' 'ERROR: No package name provided!'
+  exit 1
+fi
+
+## All apt package names in the Debian archives are lowercase, but users might
+## input an uppercase string by mistake. Change all uppercase letters to
+## lowercase.
+pkg_name="${pkg_name,,}"
+
+if ! apt-cache show "${pkg_name}" >/dev/null; then
+  ## Maybe the software comes from a newly added repo, or maybe the apt lists
+  ## aren't there.
+  if ! apt update; then
+    printf '%s\n' 'ERROR: Cannot update package lists!'
+    exit 1
+  fi
+fi
+
+exec apt install "${pkg_name}"
