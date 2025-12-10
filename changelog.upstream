@@ -1,3 +1,22 @@
+commit ac046295513132613d3c0754c46dbe40cb3d5192
+Merge: e97244e ef7bd5b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 9 23:44:26 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit ef7bd5b4928a008643fbbedb3d4dbbde7476871f
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Dec 9 18:59:33 2025 -0600
+
+    Lowercase names of packages being installed, update apt lists if the package isn't initially found
+
+commit e97244eba264c0673993d049c9e2b59e643ba348
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 30 05:48:54 2025 +0000
+
+    bumped changelog version
+
 commit 5453658ad0b197cc04013274ed034028ea94e484
 Merge: 56bbe3d 8027359
 Author: Patrick Schleizer <adrelanos@whonix.org>
