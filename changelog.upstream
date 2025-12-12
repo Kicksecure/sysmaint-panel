@@ -1,3 +1,34 @@
+commit f5016e9ea246701a6c9e0269acf28b455649ae35
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 12 04:40:08 2025 -0500
+
+    output
+
+commit 9ebba7a5a0d626b3da76b16dfe44e7c24e526e6f
+Merge: 5d9c646 245bda4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 12 04:38:49 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 245bda49ff4cec3244d041f712f8d5c35499bbcf
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Dec 11 21:04:04 2025 -0600
+
+    Add button for toggling panic-on-oops.service on and off
+
+commit 6d89fbea1902c5a4269d5bf0b96d3e9eda002179
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Dec 11 20:39:44 2025 -0600
+
+    Restructure how sysmaint-panel's main window UI is built, polish create-user script, create delete-user script
+
+commit 5d9c6461e7e1445534505f0e8c1923ca7d2c3af2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Dec 10 15:10:22 2025 +0000
+
+    bumped changelog version
+
 commit ac046295513132613d3c0754c46dbe40cb3d5192
 Merge: e97244e ef7bd5b
 Author: Patrick Schleizer <adrelanos@whonix.org>
