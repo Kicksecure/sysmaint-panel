@@ -569,6 +569,9 @@ class MainWindow(QMainWindow):
             self.lxqt_config_button = self.make_button(
                 self.sagbl_info, "LXQt Configuration", self.lxqt_config
             )
+        self.toggle_panic_on_oops_button = self.make_button(
+            self.sagbl_info, "Toggle Panic-on-Oops", self.toggle_panic_on_oops
+        )
         self.system_administration_group_box.setLayout(
             self.system_administration_group_box_layout
         )
@@ -705,6 +708,16 @@ class MainWindow(QMainWindow):
     def lxqt_config(self):
         subprocess.Popen(["/usr/bin/lxqt-config"])
         timeout_lock(self.lxqt_config_button)
+
+    def toggle_panic_on_oops(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/libexec/sysmaint-panel/toggle-panic-on-oops",
+            ]
+        )
+        timeout_lock(self.toggle_panic_on_oops_button)
 
     @staticmethod
     def manage_software():
