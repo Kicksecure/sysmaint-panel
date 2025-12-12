@@ -1,9 +1,9 @@
 #!/bin/bash
 
-## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
-## This script only exists because adduser can't prompt the user for a
+## This script only exists because deluser can't prompt the user for a
 ## username.
 
 set -o errexit
@@ -29,5 +29,5 @@ for user_entry in "${user_list[@]}"; do
   printf "%s\n" "   ${user_entry}" >&2
 done
 
-read -rp 'Enter a username for the new user: ' user_name
-adduser "${user_name}"
+read -rp 'Enter a username to delete: ' user_name
+deluser "${user_name}"
