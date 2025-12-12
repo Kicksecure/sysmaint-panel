@@ -20,6 +20,6 @@ elif [ "$panic_on_oops_enabled_status" = 'disabled' ]; then
   systemctl enable panic-on-oops.service
   systemctl start panic-on-oops.service
 else
-  printf '%s\n' "ERROR: 'systemctl is-enabled panic-on-oops.service' returned unexpected value '$panic_on_oops_enabled_status'!"
+  printf '%s\n' "ERROR: 'systemctl is-enabled panic-on-oops.service' returned unexpected value '$panic_on_oops_enabled_status'!" >&2
   exit 1
 fi
