@@ -1,3 +1,22 @@
+commit 6de30894ec14bdcc54bf89d1cbf2d6276ccfc6b8
+Merge: 5e3afda 79b328d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 26 14:00:04 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 79b328d82bfbaaf68c0a060f0ffda4475ebf9f8c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Dec 25 21:34:53 2025 -0600
+
+    Add dynamic resolution config button to non-qubes VMs
+
+commit 5e3afda50697d80be1c210fe3d1edead71ee77a1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 19 11:39:21 2025 +0000
+
+    bumped changelog version
+
 commit fbb749777e4f0771515f41a080d25d525233416d
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Dec 19 06:24:52 2025 -0500
