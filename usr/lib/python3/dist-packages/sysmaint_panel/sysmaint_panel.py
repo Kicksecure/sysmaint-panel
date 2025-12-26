@@ -58,6 +58,39 @@ def is_whonix_workstation():
     return Path("/usr/share/anon-ws-base-files/workstation").exists()
 
 
+is_non_qubes_vm_val = None
+def is_non_qubes_vm():
+    global is_non_qubes_vm_val
+
+    if is_non_qubes_vm_val is None:
+        systemd_detect_virt_rslt = subprocess.run(
+            ["/usr/bin/systemd-detect-virt"],
+            check=False,
+            capture_output=True,
+            encoding="utf-8",
+        ).stdout.strip()
+        ## Not Python value None, but the literal string "none".
+        if systemd_detect_virt_rslt == "none":
+            is_non_qubes_vm_val = False
+        elif is_qubes_os():
+            is_non_qubes_vm_val = False
+        else:
+            is_non_qubes_vm_val = True
+    return is_non_qubes_vm_val
+
+
+def is_package_installed(package_name):
+    return subprocess.run(
+        [
+            "bash",
+            "-c",
+            "source /usr/libexec/helper-scripts/package_installed_check.sh; "
+            + f"pkg_installed '{package_name}'"
+        ],
+        check=False
+    ).returncode == 0
+
+
 def timeout_lock(button):
     button_text_parts = button.text().split(" ")
     button_text_end_number = button_text_parts[
@@ -449,11 +482,7 @@ class MainWindow(QMainWindow):
 
         # ---
 
-        if (
-            "rd.live.image" in kernel_cmdline
-            ## TODO: Why are we looking at remove-sysmaint here?
-            or "remove-sysmaint" in kernel_cmdline
-        ):
+        if "rd.live.image" in kernel_cmdline:
             self.installation_group_box = QGroupBox("Installation")
             self.installation_group_box_layout = QGridLayout()
             self.installation_group_box_layout.setColumnStretch(0, 1)
@@ -562,6 +591,12 @@ class MainWindow(QMainWindow):
             self.configure_displays_button = self.make_button(
                 self.sagbl_info, "Configure Displays", self.configure_displays
             )
+            if is_non_qubes_vm() and is_package_installed("vm-config-dist"):
+                self.dynamic_resolution_button = self.make_button(
+                    self.sagbl_info,
+                    "Dynamic Resolution",
+                    self.dynamic_resolution
+                )
             self.set_system_keymap_button = self.make_button(
                 self.sagbl_info, "Set System Keymap", self.set_system_keymap
             )
@@ -732,6 +767,16 @@ class MainWindow(QMainWindow):
     def configure_displays(self):
         subprocess.Popen(["/usr/bin/wdisplays"])
         timeout_lock(self.configure_displays_button)
+
+    def dynamic_resolution(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/configure-dynamic-resolution",
+            ]
+        )
+        timeout_lock(self.dynamic_resolution_button)
 
     def set_system_keymap(self):
         subprocess.Popen(
