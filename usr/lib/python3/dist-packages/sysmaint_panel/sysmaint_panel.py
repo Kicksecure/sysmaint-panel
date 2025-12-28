@@ -82,10 +82,8 @@ def is_non_qubes_vm():
 def is_package_installed(package_name):
     return subprocess.run(
         [
-            "bash",
-            "-c",
-            "source /usr/libexec/helper-scripts/package_installed_check.sh; "
-            + f"pkg_installed '{package_name}'"
+            "/usr/bin/package-installed-check",
+            package_name,
         ],
         check=False
     ).returncode == 0
