@@ -1,3 +1,22 @@
+commit cf742695d6d5653bae2fc9f727c3ee7fc49de943
+Merge: 1306813 2389bce
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Dec 28 01:31:24 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 2389bcea837e912506599236c7fb2b18bb0ef38f
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Dec 27 19:03:04 2025 -0600
+
+    Use package-installed-check binary rather than package_installed_check.sh library
+
+commit 1306813cb67a439d886f721c26095daec470ba6c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 26 19:03:56 2025 +0000
+
+    bumped changelog version
+
 commit 6de30894ec14bdcc54bf89d1cbf2d6276ccfc6b8
 Merge: 5e3afda 79b328d
 Author: Patrick Schleizer <adrelanos@whonix.org>
