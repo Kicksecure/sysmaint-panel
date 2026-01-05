@@ -1,3 +1,22 @@
+commit 1a93b0f93388d058fce35345147f44ea223dd116
+Merge: 5a410e6 d6ea1da
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 5 03:49:16 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit d6ea1da3f8b4f424f063350f8deda54787c2d2b5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Jan 4 18:55:52 2026 -0600
+
+    Fix "Install System" button size
+
+commit 5a410e67ec3c4a1a835ba400207b73b3e53d7cc8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Dec 28 06:37:45 2025 +0000
+
+    bumped changelog version
+
 commit cf742695d6d5653bae2fc9f727c3ee7fc49de943
 Merge: 1306813 2389bce
 Author: Patrick Schleizer <adrelanos@whonix.org>
