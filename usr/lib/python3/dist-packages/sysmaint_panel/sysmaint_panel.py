@@ -484,7 +484,10 @@ class MainWindow(QMainWindow):
             self.installation_group_box = QGroupBox("Installation")
             self.installation_group_box_layout = QGridLayout()
             self.installation_group_box_layout.setColumnStretch(0, 1)
-            self.installation_group_box_layout.setColumnStretch(1, 1)
+            ## If there is ever a need to add more than one button to this
+            ## group box, uncomment the line below to ensure the second column
+            ## of buttons is correctly sized.
+            #self.installation_group_box_layout.setColumnStretch(1, 1)
             self.igbl_info = MainWindowLayoutInfo(
                 self.installation_group_box_layout
             )
