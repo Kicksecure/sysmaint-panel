@@ -89,6 +89,13 @@ def is_package_installed(package_name):
     ).returncode == 0
 
 
+def is_secure_boot_enabled():
+    return subprocess.run(
+        ["/usr/bin/secure-boot-enabled-check"],
+        check=False,
+    ).returncode == 0
+
+
 def timeout_lock(button):
     button_text_parts = button.text().split(" ")
     button_text_end_number = button_text_parts[
@@ -608,6 +615,12 @@ class MainWindow(QMainWindow):
         self.toggle_panic_on_oops_button = self.make_button(
             self.sagbl_info, "Toggle Panic-on-Oops", self.toggle_panic_on_oops
         )
+        if is_secure_boot_enabled():
+            self.enroll_secure_boot_mok_button = self.make_button(
+                self.sagbl_info,
+                "Enroll Secure Boot MOK",
+                self.enroll_secure_boot_mok,
+            )
         self.system_administration_group_box.setLayout(
             self.system_administration_group_box_layout
         )
@@ -754,6 +767,16 @@ class MainWindow(QMainWindow):
             ]
         )
         timeout_lock(self.toggle_panic_on_oops_button)
+
+    def enroll_secure_boot_mok(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/shim-enroll-mok",
+            ]
+        )
+        timeout_lock(self.enroll_secure_boot_mok_button)
 
     @staticmethod
     def manage_software():
