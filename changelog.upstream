@@ -1,3 +1,22 @@
+commit 3b5284d6e3a493e1e74f9d16707e6424c2af9aee
+Merge: 82887a2 5dbc91d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 7 04:38:15 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 5dbc91d91a82e70bb263745ad81e83cfe7069fc1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Jan 6 22:39:29 2026 -0600
+
+    Add button for enrolling a Secure Boot MOK
+
+commit 82887a2d19540293ee75a7716e586e7eab3db464
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 5 10:29:41 2026 +0000
+
+    bumped changelog version
+
 commit 1a93b0f93388d058fce35345147f44ea223dd116
 Merge: 5a410e6 d6ea1da
 Author: Patrick Schleizer <adrelanos@whonix.org>
