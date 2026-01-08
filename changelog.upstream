@@ -1,3 +1,22 @@
+commit fe144dbdbfd81b5ec6f0e820d897d5aa2240dbb2
+Merge: ea7e26e 5038fac
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jan 8 04:12:13 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 5038fac3454cec2566b23e48ddcace6a02f19628
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Jan 7 21:39:43 2026 -0600
+
+    Hide MOK enrollment button if the MOK is already enrolled
+
+commit ea7e26e75b7dfd684d75a16837947ba001178305
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 7 10:20:10 2026 +0000
+
+    bumped changelog version
+
 commit 3b5284d6e3a493e1e74f9d16707e6424c2af9aee
 Merge: 82887a2 5dbc91d
 Author: Patrick Schleizer <adrelanos@whonix.org>
