@@ -89,29 +89,31 @@ def is_package_installed(package_name):
     ).returncode == 0
 
 
-def is_secure_boot_enabled():
-    return subprocess.run(
-        ["/usr/bin/secure-boot-enabled-check"],
-        check=False,
-    ).returncode == 0
-
-
-def can_mok_be_enrolled():
-    if (
-        not Path("/usr/bin/mokutil").is_file()
-        or not os.access("/usr/bin/mokutil", os.X_OK)
-    ):
-        return False
-    if not Path("/var/lib/dkms/mok.pub").is_file():
-        ## Intentionally return True here, since the enroll application will
-        ## generate a MOK if one doesn't exist, and a newly generated MOK
-        ## surely won't be enrolled yet.
-        return True
-    ## 'mokutil --test-key' returns 0 if the MOK can be enrolled, 1 otherwise.
-    return subprocess.run(
-        ["/usr/bin/leaprun", "mokutil-test-key"],
-        check=False,
-    ).returncode == 0
+## The below two functions are commented out because they are not currently
+## used for anything, but may be useful in the future.
+#def is_secure_boot_enabled():
+#    return subprocess.run(
+#        ["/usr/bin/secure-boot-enabled-check"],
+#        check=False,
+#    ).returncode == 0
+#
+#
+#def can_mok_be_enrolled():
+#    if (
+#        not Path("/usr/bin/mokutil").is_file()
+#        or not os.access("/usr/bin/mokutil", os.X_OK)
+#    ):
+#        return False
+#    if not Path("/var/lib/dkms/mok.pub").is_file():
+#        ## Intentionally return True here, since the enroll application will
+#        ## generate a MOK if one doesn't exist, and a newly generated MOK
+#        ## surely won't be enrolled yet.
+#        return True
+#    ## 'mokutil --test-key' returns 0 if the MOK can be enrolled, 1 otherwise.
+#    return subprocess.run(
+#        ["/usr/bin/leaprun", "mokutil-test-key"],
+#        check=False,
+#    ).returncode == 0
 
 
 def timeout_lock(button):
@@ -633,12 +635,16 @@ class MainWindow(QMainWindow):
         self.toggle_panic_on_oops_button = self.make_button(
             self.sagbl_info, "Toggle Panic-on-Oops", self.toggle_panic_on_oops
         )
-        if is_secure_boot_enabled() and can_mok_be_enrolled():
-            self.enroll_secure_boot_mok_button = self.make_button(
-                self.sagbl_info,
-                "Enroll Secure Boot MOK",
-                self.enroll_secure_boot_mok,
-            )
+        self.enroll_secure_boot_mok_button = self.make_button(
+            self.sagbl_info,
+            "Enroll Secure Boot MOK",
+            self.enroll_secure_boot_mok,
+        )
+        self.reset_secure_boot_mok_button = self.make_button(
+            self.sagbl_info,
+            "Reset Secure Boot MOK",
+            self.reset_secure_boot_mok,
+        )
         self.system_administration_group_box.setLayout(
             self.system_administration_group_box_layout
         )
@@ -791,10 +797,22 @@ class MainWindow(QMainWindow):
             [
                 "/usr/libexec/helper-scripts/terminal-wrapper",
                 "/usr/bin/sudo",
-                "/usr/sbin/shim-enroll-mok",
+                "/usr/sbin/shim-manage-mok",
+                "--enroll",
             ]
         )
         timeout_lock(self.enroll_secure_boot_mok_button)
+
+    def reset_secure_boot_mok(self):
+        subprocess.Popen(
+            [
+                "/usr/libexec/helper-scripts/terminal-wrapper",
+                "/usr/bin/sudo",
+                "/usr/sbin/shim-manage-mok",
+                "--reset",
+            ]
+        )
+        timeout_lock(self.reset_secure_boot_mok_button)
 
     @staticmethod
     def manage_software():
