@@ -1,3 +1,22 @@
+commit 2bf200cf0d7b8ea118d1be73e19203f83cf6ab82
+Merge: 3a30f15 819d5d6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jan 22 04:34:01 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 819d5d6ec590790242cb05e26e125beae9ca215f
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Jan 19 20:34:58 2026 -0600
+
+    Unconditionally show MOK enrollment button, add MOK reset button
+
+commit 3a30f155f7a35ce252b7e0b4e02e271c5e9ada46
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jan 8 09:43:47 2026 +0000
+
+    bumped changelog version
+
 commit fe144dbdbfd81b5ec6f0e820d897d5aa2240dbb2
 Merge: ea7e26e 5038fac
 Author: Patrick Schleizer <adrelanos@whonix.org>
