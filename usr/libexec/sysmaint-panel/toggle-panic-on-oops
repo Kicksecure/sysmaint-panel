@@ -18,14 +18,14 @@ panic_on_oops_enabled_status="$(systemctl is-enabled panic-on-oops.service)" \
 
 if [ "$panic_on_oops_enabled_status" = 'enabled' ]; then
   log info "panic-on-oops.service is currently enabled, therefore disabling and stopping it."
-  systemctl disable panic-on-oops.service
-  systemctl stop panic-on-oops.service
+  log_run info systemctl disable panic-on-oops.service
+  log_run info systemctl stop panic-on-oops.service
   log info "Done, panic-on-oops.service has been disabled and stopped."
   log notice "panic-on-oops.service status: disabled"
 elif [ "$panic_on_oops_enabled_status" = 'disabled' ]; then
   log info "panic-on-oops.service is currently disabled, therefore enabling and starting it."
-  systemctl enable panic-on-oops.service
-  systemctl start panic-on-oops.service
+  log_run info systemctl enable panic-on-oops.service
+  log_run info systemctl start panic-on-oops.service
   log info "Done, panic-on-oops.service has been enabled and started."
   log notice "panic-on-oops.service status: enabled"
 else
