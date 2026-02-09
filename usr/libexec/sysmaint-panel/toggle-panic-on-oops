@@ -9,6 +9,9 @@ set -o errtrace
 set -o pipefail
 
 # shellcheck source=../libexec/helper-scripts/log_run_die.sh
+source /usr/libexec/helper-scripts/get_colors.sh
+
+# shellcheck source=../libexec/helper-scripts/log_run_die.sh
 source /usr/libexec/helper-scripts/log_run_die.sh
 
 log_level=info
@@ -23,13 +26,13 @@ if [ "$panic_on_oops_enabled_status" = 'enabled' ]; then
   log_run info systemctl disable panic-on-oops.service
   log_run info systemctl stop panic-on-oops.service
   log info "Done, panic-on-oops.service has been disabled and stopped."
-  log notice "panic-on-oops.service status: disabled"
+  log notice "panic-on-oops.service status: ${bold}${red}disabled${reset}"
 elif [ "$panic_on_oops_enabled_status" = 'disabled' ]; then
   log info "panic-on-oops.service is currently disabled, therefore enabling and starting it."
   log_run info systemctl enable panic-on-oops.service
   log_run info systemctl start panic-on-oops.service
   log info "Done, panic-on-oops.service has been enabled and started."
-  log notice "panic-on-oops.service status: enabled"
+  log notice "panic-on-oops.service status: ${bold}${green}enabled${reset}"
 else
   log error "'systemctl is-enabled panic-on-oops.service' returned unexpected value '$panic_on_oops_enabled_status'!" >&2
   exit 1
