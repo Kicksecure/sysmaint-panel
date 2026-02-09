@@ -8,22 +8,27 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
+# shellcheck source=../libexec/helper-scripts/log_run_die.sh
+source /usr/libexec/helper-scripts/log_run_die.sh
+
+log_level=info
+
 panic_on_oops_enabled_status="$(systemctl is-enabled panic-on-oops.service)" \
   || true
 
 if [ "$panic_on_oops_enabled_status" = 'enabled' ]; then
-  printf '%s\n' "INFO: panic-on-oops.service is currently enabled, therefore disabling and stopping it."
+  log info "panic-on-oops.service is currently enabled, therefore disabling and stopping it."
   systemctl disable panic-on-oops.service
   systemctl stop panic-on-oops.service
-  printf '%s\n' "INFO: Done, panic-on-oops.service has been disabled and stopped."
-  printf '%s\n' "INFO: panic-on-oops.service status: disabled"
+  log info "Done, panic-on-oops.service has been disabled and stopped."
+  log notice "panic-on-oops.service status: disabled"
 elif [ "$panic_on_oops_enabled_status" = 'disabled' ]; then
-  printf '%s\n' "INFO: panic-on-oops.service is currently disabled, therefore enabling and starting it."
+  log info "panic-on-oops.service is currently disabled, therefore enabling and starting it."
   systemctl enable panic-on-oops.service
   systemctl start panic-on-oops.service
-  printf '%s\n' "INFO: Done, panic-on-oops.service has been enabled and started."
-  printf '%s\n' "INFO: panic-on-oops.service status: enabled"
+  log info "Done, panic-on-oops.service has been enabled and started."
+  log notice "panic-on-oops.service status: enabled"
 else
-  printf '%s\n' "ERROR: 'systemctl is-enabled panic-on-oops.service' returned unexpected value '$panic_on_oops_enabled_status'!" >&2
+  log error "'systemctl is-enabled panic-on-oops.service' returned unexpected value '$panic_on_oops_enabled_status'!" >&2
   exit 1
 fi
