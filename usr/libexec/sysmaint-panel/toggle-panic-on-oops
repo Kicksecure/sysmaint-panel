@@ -13,6 +13,8 @@ source /usr/libexec/helper-scripts/log_run_die.sh
 
 log_level=info
 
+log notice "start"
+
 panic_on_oops_enabled_status="$(systemctl is-enabled panic-on-oops.service)" \
   || true
 
@@ -32,3 +34,5 @@ else
   log error "'systemctl is-enabled panic-on-oops.service' returned unexpected value '$panic_on_oops_enabled_status'!" >&2
   exit 1
 fi
+
+log notice "end: OK"
