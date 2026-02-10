@@ -1,3 +1,58 @@
+commit f6fd373d47586b3d07af56ce630fb739ad8fff44
+Merge: 65a3bc2 fdb70fb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Feb 10 07:09:11 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 65a3bc26b022de6d2e67997fc881d523e1d617e6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Feb 9 08:32:16 2026 -0500
+
+    colors
+
+commit 019633bed8fb2faa2490baad891956760beb2834
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Feb 9 08:29:55 2026 -0500
+
+    output
+
+commit 3eb573c3f11e0d7191d0104b633c39432469f654
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Feb 9 08:27:43 2026 -0500
+
+    output
+
+commit 65abd1333c43417c12c99eed9778601ea62bf08d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Feb 9 08:26:54 2026 -0500
+
+    port to log_run_die.sh
+
+commit 86305263e059ba0431808606f44f410cc9697d3d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Feb 9 08:24:37 2026 -0500
+
+    output
+
+commit 5537a75117dc8c5af8a9919e7e4c5259eb2d2dff
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Feb 9 08:23:02 2026 -0500
+
+    output
+
+commit fdb70fb3748ae19277d7b0ac6d1fa4295f72db0f
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Sun Feb 8 19:41:19 2026 -0600
+
+    Add kanshi configuration buttons
+
+commit 72f019dce9628211dfee14d9d4bbddbf0c153d8c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jan 22 11:00:02 2026 +0000
+
+    bumped changelog version
+
 commit 2bf200cf0d7b8ea118d1be73e19203f83cf6ab82
 Merge: 3a30f15 819d5d6
 Author: Patrick Schleizer <adrelanos@whonix.org>
