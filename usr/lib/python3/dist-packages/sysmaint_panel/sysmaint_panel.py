@@ -18,6 +18,7 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QLabel,
     QVBoxLayout,
+    QHBoxLayout,
     QGridLayout,
     QGroupBox,
     QWidget,
@@ -340,6 +341,47 @@ class ManagePasswordsDialog(QDialog):
                 "/usr/bin/sudo",
                 "/usr/sbin/crypt-pwchange",
             ]
+        )
+        self.done(0)
+
+
+class ConfigureDisplaysWindow(QDialog):
+    def __init__(self):
+        super(ConfigureDisplaysWindow, self).__init__()
+        self.setWindowTitle("Configure Displays")
+        self.main_layout = QVBoxLayout()
+        self.header_label = QLabel()
+        self.header_label.setText("Configure Displays")
+        self.main_layout.addWidget(self.header_label)
+        self.main_layout.addStretch()
+        self.launch_wdisplays_button = QPushButton()
+        self.launch_wdisplays_button.setText("Launch wdisplays")
+        self.launch_wdisplays_button.clicked.connect(self.launch_wdisplays)
+        self.main_layout.addWidget(self.launch_wdisplays_button)
+        self.open_kanshi_config_button = QPushButton()
+        self.open_kanshi_config_button.setText("Open desktop configuration file (kanshi)")
+        self.open_kanshi_config_button.clicked.connect(self.open_kanshi_config)
+        self.main_layout.addWidget(self.open_kanshi_config_button)
+        self.restart_kanshi_button = QPushButton()
+        self.restart_kanshi_button.setText("Apply display configuration (restart kanshi)")
+        self.restart_kanshi_button.clicked.connect(self.restart_kanshi)
+        self.main_layout.addWidget(self.restart_kanshi_button)
+        self.setLayout(self.main_layout)
+        self.resize(self.minimumWidth(), self.minimumHeight())
+
+    def launch_wdisplays(self):
+        subprocess.Popen(["/usr/bin/wdisplays"])
+        self.done(0)
+
+    def open_kanshi_config(self):
+        subprocess.Popen(
+            ["/usr/libexec/desktop-config-dist/open-kanshi-config"]
+        )
+        self.done(0)
+
+    def restart_kanshi(self):
+        subprocess.Popen(
+            ["/usr/libexec/desktop-config-dist/restart-kanshi"]
         )
         self.done(0)
 
@@ -824,9 +866,10 @@ class MainWindow(QMainWindow):
         search_logs_window = SearchLogsDialog()
         search_logs_window.exec()
 
-    def configure_displays(self):
-        subprocess.Popen(["/usr/bin/wdisplays"])
-        timeout_lock(self.configure_displays_button)
+    @staticmethod
+    def configure_displays():
+        configure_displays_window = ConfigureDisplaysWindow()
+        configure_displays_window.exec()
 
     def dynamic_resolution(self):
         subprocess.Popen(
