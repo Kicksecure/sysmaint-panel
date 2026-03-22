@@ -1,3 +1,22 @@
+commit 41a7748146b33980b56434024265cad7d56bd135
+Merge: 8950ce7 ca9cd9a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Mar 22 05:50:00 2026 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit ca9cd9a80b3b04d1414fdeff8f5aa3f4c8baf2f5
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Sun Mar 22 00:04:15 2026 -0400
+
+    Use sysmaint-panel's start menu icon as a window icon as well
+
+commit 8950ce7a96f2813ee7ffa188fddc59c8bea35404
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Feb 10 12:18:01 2026 +0000
+
+    bumped changelog version
+
 commit f6fd373d47586b3d07af56ce630fb739ad8fff44
 Merge: 65a3bc2 fdb70fb
 Author: Patrick Schleizer <adrelanos@whonix.org>
