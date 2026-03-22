@@ -1001,6 +1001,7 @@ class MainWindow(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
+    app.setDesktopFileName("sysmaint-panel")
 
     sudo_stat_info = os.stat("/usr/bin/sudo")
     sudo_owning_gid = sudo_stat_info.st_gid
