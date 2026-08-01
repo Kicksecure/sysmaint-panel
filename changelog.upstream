@@ -1,3 +1,40 @@
+commit d6353b4a7ee6e96f492234f8078473bfb79f4693
+Merge: 49af1c4 f9a7988
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Aug 1 04:24:56 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/org-ai-assisted/master'
+
+commit f9a798836a49df52503bfb6b4af2fa2dd2ab4fde
+Merge: 49af1c4 3d94cd9
+Author: assisted-by-ai (Bot Account) (Machine Account) <228987186+assisted-by-ai@users.noreply.github.com>
+Date:   Fri Jul 31 15:51:44 2026 -0400
+
+    Merge pull request #1 from org-ai-assisted/ai
+
+    ci: add file-based CodeQL python lane
+
+commit 3d94cd91f9406965f94ae84bcc79c13745abbdb9
+Author: claude (dev142 b93fb2c6-e15f-4d45-8566-f3ded893b70e) <noreply@anthropic.com>
+Date:   Fri Jul 31 15:05:54 2026 -0400
+
+    ci: add file-based CodeQL python lane
+
+    Propagate consumer-codeql-python.yml byte-identically from
+    developer-meta-files/consumer-templates. sysmaint-panel ships real product Python (privileged PyQt maintenance panel) that had no python CodeQL
+    analysis.
+
+    build-mode none; push/PR/workflow_dispatch triggers. No dm-consumer.yml
+    section required (reusable soft-skips an absent section).
+
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+commit 49af1c41362288fb3357f9415e581d6626ccb0f7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 20 22:22:37 2026 +0000
+
+    bumped changelog version
+
 commit 72b4cdea76c542a791188416f8e3fca3a55ad491
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed May 20 16:57:17 2026 -0400
