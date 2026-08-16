@@ -1,9 +1,60 @@
+commit 799a8589dd697f027a206139ff48f41c2b06260f
+Merge: 3b9267f ac8abb8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 12 03:03:30 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit ac8abb82155bc2c32ad7679a7b7414bb6ac9d5a4
+Merge: da3198c 3b9267f
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Mon Aug 10 23:46:39 2026 -0400
+
+    Merge branch 'master' into arraybolt3/trixie
+
+commit da3198c2afb27b585132d309e8198841e2bb27a8
+Merge: 49af1c4 6b75e0b
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Sun Aug 9 12:24:40 2026 -0400
+
+    Merge branch 'ai' into arraybolt3/trixie
+
+commit 3b9267f214185a4a8223a61f6c61ad9562e45852
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Aug 1 08:42:35 2026 +0000
+
+    bumped changelog version
+
 commit d6353b4a7ee6e96f492234f8078473bfb79f4693
 Merge: 49af1c4 f9a7988
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Aug 1 04:24:56 2026 -0400
 
     Merge remote-tracking branch 'refs/remotes/org-ai-assisted/master'
+
+commit 6b75e0b55d246434648f98281638502d9ef4d511
+Author: claude (dev142 b93fb2c6-e15f-4d45-8566-f3ded893b70e) <noreply@anthropic.com>
+Date:   Fri Jul 31 16:23:29 2026 -0400
+
+    CI: propagate bandit, codeql-actions, secrets-audit workflows
+
+    Byte-identical propagation from developer-meta-files
+    consumer-templates. Closes scanner-coverage gaps:
+
+    - consumer-bandit.yml: Python security lint, universal
+      self-discovery (extension + shebang scan), no per-repo config.
+    - consumer-codeql-actions.yml: CodeQL 'actions' language --
+      workflow-YAML security analysis (script-injection, missing
+      permissions, unpinned actions).
+    - consumer-secrets-audit.yml: manual-dispatch secrets surface
+      audit (presence flags only, values never emitted).
+
+    Managed files -- do not hand-edit; regenerated on the next
+    propagation pass.
+
+    ## AI-Assisted
+
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
 
 commit f9a798836a49df52503bfb6b4af2fa2dd2ab4fde
 Merge: 49af1c4 3d94cd9
