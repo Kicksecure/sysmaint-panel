@@ -1,3 +1,29 @@
+commit 2f32c4e7629c3a40d311f01223b63ccb2e69f0eb
+Merge: 09efc95 5b4b1be
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Aug 24 03:07:02 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/org-ai-assisted/ai'
+
+commit 5b4b1be6006ba93e6109d746c4a51dc14b0ddc93
+Author: claude (dev272 e8b76afb-795c-4739-8ebd-023de854021e) <noreply@anthropic.com>
+Date:   Fri Aug 21 04:36:22 2026 -0400
+
+    sysmaint-panel: source helper-scripts via HELPER_SCRIPTS_PATH, drop SC1091 disable
+
+    - toggle-panic-on-oops: use source "${HELPER_SCRIPTS_PATH:-}"/usr/libexec/helper-scripts/<f>;
+      correct the stale shellcheck source= directives to the canonical sibling-repo form.
+    - completed pre-existing whole-file style debt: R-010 strict-mode block
+      (shopt inherit_errexit, shift_verbose, export LC_ALL=C) and SC2250 var braces.
+
+    Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+commit 09efc957de7a312f08234932c40ddd1fe30e8754
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Aug 17 04:25:28 2026 +0000
+
+    bumped changelog version
+
 commit b91d59170df5c430f0769840f16c483cc191e83c
 Merge: d003afd 70c59fb
 Author: Patrick Schleizer <adrelanos@whonix.org>
